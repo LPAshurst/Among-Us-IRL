@@ -1,4 +1,4 @@
-To start an instance: `docker-compose -f docker-compose-mysql-only.yml up`
+To start an instance: `docker compose -f docker-compose-mysql-only.yml up --build`
 
 To enter the instance: `docker exec -it backend-db-1 bash`
 
