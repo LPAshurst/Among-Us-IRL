@@ -1,5 +1,9 @@
-To start an instance: `docker compose -f docker-compose-mysql-only.yml up --build`
+- To start an instance: `docker compose up`
 
-To enter the instance: `docker exec -it backend-db-1 bash`
+    Use `-d` flag to run in background
 
-To access the db once in: `mysql -uroot -p`
+- To enter the instance: `docker exec -it backend-db-1 bash`
+
+- To access the db once in: `mysql -uroot -p`
+
+- To remove existing db structure: `docker volume rm backend_db` or `docker compose down -v`
