@@ -1,2 +1,4 @@
 amongus-frontend/node_modules/
 backend/etc/mysql/data
+**/dist
+**/node_modules
