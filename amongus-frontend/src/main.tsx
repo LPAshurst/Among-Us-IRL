@@ -4,6 +4,7 @@ import App from './App.tsx';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 
+
 import ErrorPage from "./errors/error-page";
 import TaskScreen from './routes/task-screen.tsx';
 
@@ -17,7 +18,6 @@ const router = createBrowserRouter(
   {
     path: "task-screen",
     element: <TaskScreen />,
-    errorElement: <ErrorPage />
   }
 ]
 );
