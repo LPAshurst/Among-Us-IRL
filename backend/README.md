@@ -3,7 +3,7 @@
         Use `-d` flag to run in background
 
         On windows, make sure that docker desktop is running
-- To enter the instance: `docker exec -it backend-db-1 bash`
+- To enter the instance: `docker exec -it amongdb bash`
 
 - To access the db once in: `mysql -uroot -p`
 
