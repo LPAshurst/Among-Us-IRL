@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import FNAF from "../../public/FNAF_jumpscare.mp4"
+import FNAF from '/src/assets/FNAF_jumpscare.mp4'
 
 
 export default function ErrorPage() {

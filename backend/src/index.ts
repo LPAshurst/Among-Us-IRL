@@ -2,9 +2,13 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import routes from './routes';
+import * as cors from 'cors';
+
 // get express application
 const app = express();
 // body parser middleware
+
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 // define app port
