@@ -27,7 +27,7 @@ const getAll = (req: Request, res: Response) => {
 
 const getUserTasks = (req: Request, res: Response, id: Number) => {
     connection.getConnection((err: QueryError, conn: PoolConnection) => {
-        conn.query("SELECT * FROM task WHERE user_id = ?", [id], (err, resultSet: Task[]) => {
+        conn.query(format("SELECT * FROM task WHERE user_id = ?", [id]), (err, resultSet: Task[]) => {
             conn.release();
             if (err) {
                 console.error(err.message);
