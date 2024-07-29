@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function App() {
   return (
     <>
-      <div className="flex w-screen items-end rounded-lg bg-blue-900 p-3 md:h-52 mt-5">
+      <div className="flex w-screen bg-blue-900 p-2 md:h-52">
         <AmongUsLogo />
       </div>
 
