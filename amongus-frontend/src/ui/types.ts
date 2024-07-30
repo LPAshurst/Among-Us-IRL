@@ -1,4 +1,10 @@
-export default interface LoginProps {
+interface LoginProps {
     loggedIn: boolean;
-    login: () => void;
+    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+interface TextProps {
+    text: string;
+}
+
+export type {LoginProps, TextProps}

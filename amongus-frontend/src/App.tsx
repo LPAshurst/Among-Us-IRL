@@ -2,9 +2,10 @@
 import './App.css';
 import AmongUsLogo from './ui/amongus_logo';
 
+
 // React imports
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+
 
 // Swiper imports
 import { Autoplay, Pagination} from 'swiper/modules';
@@ -17,9 +18,8 @@ import 'swiper/css/pagination';
 import red_among from './assets/red_among.png';
 import Zane_Lorenzo from './assets/zane_lorenzo.png'
 
-export default function App() {
+export default function App( ) {
 
-  const [isLoggedIn, setLogIn] = useState(false);
 
   return (
     <>
@@ -28,9 +28,15 @@ export default function App() {
       </div>
 
       <div className='flex w-full h-32 justify-center'>
-        <Link to="login" state={{loggedIn: isLoggedIn}} className='self-end'>
-          <button className='bg-blue-900'>
-            <span className='text-[20px] font-lusitana text-neutral-200'> Login </span>
+        <Link to="login"  className='self-end '>
+          <button className='bg-blue-900 w-28'>
+            <span className='text-[20px] font-lusitana text-neutral-200'> Log in </span>
+          </button>
+        </Link>
+
+        <Link to="singup" className='self-end ml-5'>
+          <button className='bg-blue-900 w-28'>
+            <span className='text-[20px] font-lusitana text-neutral-200'> Sign up </span>
           </button>
         </Link>
       </div >
