@@ -1,5 +1,5 @@
 export interface Task {
-    name: string;
-    location: string;
-    difficulty: string;
+  name: string;
+  location: string;
+  difficulty: string;
 }
