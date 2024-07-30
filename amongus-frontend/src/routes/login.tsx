@@ -21,12 +21,12 @@ export default function LoginPage() {
           </p>
 
           <div className="flex w-2/3 h-10 border-2 border-red-950 rounded-md mt-5 ">
-            <input className="w-full rounded-md focus:outline-none" placeholder="Enter username here">
+            <input className="w-full rounded-md focus:outline-none p-1" placeholder="Enter username here">
             </input>
           </div>
 
           <div className="flex w-2/3 h-10 border-2 border-red-950 rounded-md mt-8">
-            <input className="w-full rounded-md focus:outline-none" placeholder="Enter password here">
+            <input className="w-full rounded-md focus:outline-none p-1 " placeholder="Enter password here">
             </input>
           </div>
 
