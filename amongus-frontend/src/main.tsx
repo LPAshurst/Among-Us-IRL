@@ -6,7 +6,7 @@ import './index.css';
 
 
 import ErrorPage from "./errors/error-page";
-import TaskScreen from './routes/task-screen.tsx';
+import LoginPage from './routes/login.tsx';
 
 const router = createBrowserRouter(
 [
@@ -16,8 +16,8 @@ const router = createBrowserRouter(
     errorElement: <ErrorPage />
   },
   {
-    path: "task-screen",
-    element: <TaskScreen />,
+    path: "login",
+    element: <LoginPage />,
   }
 ]
 );

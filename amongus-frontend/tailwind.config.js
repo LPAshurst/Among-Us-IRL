@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        lusitana: ["Lusitana", "sans-serif"]
+        lusitana: ["Lusitana", "sans-serif"],
+        anton: ["Anton", "sans-serif"]
       }
     },
   },
