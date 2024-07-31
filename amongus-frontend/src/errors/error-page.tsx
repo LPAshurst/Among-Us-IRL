@@ -15,7 +15,7 @@ export default function ErrorPage() {
         </div>  
        
        
-        <video className="mt-44" src={FNAF} autoPlay={true} muted={true} loop={true}>
+        <video className="mt-20" src={FNAF} autoPlay={true} muted={true} loop={true}>
         </video>
 
         
