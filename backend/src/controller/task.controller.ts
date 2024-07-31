@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Task } from '../model/task';
 import { connection } from '../config/db';
 import { QueryError, PoolConnection, format } from 'mysql2';
-import { User } from '../model/User';
+import { User } from '../model/user';
 
 const getAll = (req: Request, res: Response) => {
   connection.getConnection((err: QueryError, conn: PoolConnection) => {

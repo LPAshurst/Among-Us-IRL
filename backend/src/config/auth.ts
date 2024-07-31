@@ -1,13 +1,33 @@
 import jwt from 'jsonwebtoken';
+import { connection } from '../config/db';
+import { QueryError, PoolConnection, format } from 'mysql2';
+import { User } from '../model/user';
 
-function generateAccessToken(username) {
-  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+function generateAccessToken(id) {
+  return jwt.sign(id, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
 }
 
 function createNewUser(req, res) {
-  const token = generateAccessToken({ username: req.body.username });
-  res.json(token);
-  // TODO - db creation stuff
+  const token = generateAccessToken({ id: req.body.user });
+  connection.getConnection((err: QueryError, conn: PoolConnection) => {
+    conn.query(format("INSERT INTO user (username, password) VALUES (?, ?)", ) , (err, resultSet: User[]) => {
+      conn.release();
+      if (err) {
+        console.error(err.message);
+        res.status(500).send({
+          message: 'INTERNAL SERVER ERROR',
+          result: null
+        });
+      } else {
+        
+        res.json(token);
+        res.status(200).send({
+          message: 'OK',
+          result: resultSet
+        });
+      }
+    })
+  });
 }
 
 function authenticateToken(req, res, next) {
