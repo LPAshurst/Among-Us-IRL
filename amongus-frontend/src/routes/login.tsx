@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
-  function LogInPressed() {
+  async function LogInPressed() {
     setUsernameError('');
     setPasswordError('');
 
@@ -19,6 +19,15 @@ export default function LoginPage() {
       setUsernameError('Please enter a username');
     if (password === '')
       setPasswordError('Please enter a password');
+
+    const response = await fetch("http://localhost:3010/api/auth")
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data.result)
     return
 
   }

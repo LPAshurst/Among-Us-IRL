@@ -8,6 +8,7 @@ import './index.css';
 import ErrorPage from "./errors/error-page";
 import LoginPage from './routes/login.tsx';
 import SignUpPage from './routes/signup.tsx';
+import GameCreation from './routes/game-creation.tsx';
 
 const router = createBrowserRouter(
 [
@@ -23,6 +24,10 @@ const router = createBrowserRouter(
   {
     path: "signup",
     element: <SignUpPage />
+  },
+  {
+    path: "room-creation",
+    element: <GameCreation />
   }
 ]
 );

@@ -5,10 +5,19 @@ import { useState } from "react";
 
 export default function SignUpPage() {
 
+  console.log(localStorage.getItem("logged_in"))
+  if (localStorage.getItem("logged_in") === 'true') {
+
+    console.log("in here");
+    <Link to="/room-creation" >
+    </Link>
+  }
+
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+
 
   async function LogInPressed() {
     setUsernameError('');
@@ -19,14 +28,19 @@ export default function SignUpPage() {
     if (password === '')
       setPasswordError('Please enter a password');
 
-    const response = await fetch("http://localhost:3010/api/tasks")
+    // const response = await fetch("http://localhost:3010/api/auth")
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`HTTP error! status: ${response.status}`);
+    // }
 
-    const data = await response.json();
-    console.log(data.result)
+    // const data = await response.json();
+    // console.log(data.result)
+    
+    if (!localStorage.getItem("logged_in")) 
+      localStorage.setItem("logged_in", "true");
+    console.log(localStorage.getItem("logged_in"));
+
     return
 
   }
@@ -42,7 +56,7 @@ export default function SignUpPage() {
 
         <div className="flex flex-col w-4/5 h-1/2 bg-slate-200 md:h-2/5 md:w-1/2 mb-40 items-center rounded-lg">
           <p className="md:text-[35px] text-[25px] font-lusitana text-black p-2.5 font-bold">
-          Login
+          Sign up
           </p>
 
           <div className="flex w-2/3 h-10 border-2 border-red-950 rounded-md mt-5 ">

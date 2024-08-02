@@ -18,7 +18,7 @@ import 'swiper/css/pagination';
 import red_among from './assets/red_among.png';
 import Zane_Lorenzo from './assets/zane_lorenzo.png'
 
-export default function App( ) {
+export default function App() {
 
 
   return (
@@ -34,7 +34,7 @@ export default function App( ) {
           </button>
         </Link>
 
-        <Link to="singup" className='self-end ml-5'>
+        <Link to="signup" className='self-end ml-5'>
           <button className='bg-blue-900 w-28'>
             <span className='text-[20px] font-lusitana text-neutral-200'> Sign up </span>
           </button>

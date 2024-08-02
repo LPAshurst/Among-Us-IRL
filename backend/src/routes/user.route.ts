@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import taskController from '../controller/task.controller';
+import userController from '../controller/user.controller';
 import auth from '../config/auth';
 
 const userRouter = Router();
 // specifies the endpoint and the method to call
-userRouter.get('/', taskController.getUsers);
+userRouter.get('/', userController.getUsers);
 
 
 // export the router
