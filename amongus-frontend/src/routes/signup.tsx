@@ -28,14 +28,14 @@ export default function SignUpPage() {
     if (password === '')
       setPasswordError('Please enter a password');
 
-    // const response = await fetch("http://localhost:3010/api/auth")
+    const response = await fetch("http://localhost:3010/api/auth")
 
-    // if (!response.ok) {
-    //   throw new Error(`HTTP error! status: ${response.status}`);
-    // }
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-    // const data = await response.json();
-    // console.log(data.result)
+    const data = await response.json();
+    console.log(data.result)
     
     if (!localStorage.getItem("logged_in")) 
       localStorage.setItem("logged_in", "true");

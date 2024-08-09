@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import AmongUsLogo from "../ui/amongus_logo";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { User } from "../ui/types";
 
 
 export default function LoginPage() {
@@ -10,6 +11,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const navigate = useNavigate();
+
 
   async function LogInPressed() {
     setUsernameError('');
@@ -19,15 +22,31 @@ export default function LoginPage() {
       setUsernameError('Please enter a username');
     if (password === '')
       setPasswordError('Please enter a password');
+    
+    const url = "http://localhost:3010/api/auth";
+    // const authInfo = {user: userName, pass: password};
 
-    const response = await fetch("http://localhost:3010/api/auth")
+    const req = new Request(url);
+    const response = await fetch(req)
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log(data.result)
+
+    const result = data.result;
+
+    const user = result.find((user: User) => user.username === userName && user.password === password);
+    
+    if (user) {
+      navigate("/room-creation");
+      if (!localStorage.getItem("logged_in")) 
+        localStorage.setItem("logged_in", "true");
+      console.log(localStorage.getItem("logged_in"));
+    } else {
+      window.alert("User name or password not detected");
+    }
     return
 
   }

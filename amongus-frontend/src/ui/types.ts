@@ -7,4 +7,9 @@ interface TextProps {
     text: string;
 }
 
-export type {LoginProps, TextProps}
+interface User {
+    username: string;
+    password: string
+}
+
+export type {LoginProps, TextProps, User}
