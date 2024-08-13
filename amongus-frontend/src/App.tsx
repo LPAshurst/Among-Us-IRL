@@ -28,7 +28,7 @@ export default function App() {
       </div>
 
       <div className='flex w-full h-32 justify-center'>
-        <Link to="login"  className='self-end '>
+        <Link to="login"  className='self-end'>
           <button className='bg-blue-900 w-28'>
             <span className='text-[20px] font-lusitana text-neutral-200'> Log in </span>
           </button>

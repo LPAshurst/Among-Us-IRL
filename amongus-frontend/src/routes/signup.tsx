@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import AmongUsLogo from "../ui/amongus_logo";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { User } from "../ui/types";
 
 
 export default function SignUpPage() {
@@ -17,6 +19,7 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const navigate = useNavigate();
 
 
   async function LogInPressed() {
@@ -35,14 +38,19 @@ export default function SignUpPage() {
     }
 
     const data = await response.json();
-    console.log(data.result)
+    const result = data.result;
     
-    if (!localStorage.getItem("logged_in")) 
-      localStorage.setItem("logged_in", "true");
-    console.log(localStorage.getItem("logged_in"));
-
+    const user = result.find((user: User) => user.username === userName);
+    
+    if (user) {
+      window.alert("User Name already exists");
+    } else {
+      navigate("/room-creation");
+      if (!localStorage.getItem("logged_in")) 
+        localStorage.setItem("logged_in", "true");
+      console.log(localStorage.getItem("logged_in"));
+    }
     return
-
   }
 
   return (
