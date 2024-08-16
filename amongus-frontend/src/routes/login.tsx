@@ -24,7 +24,6 @@ export default function LoginPage() {
       setPasswordError('Please enter a password');
     
     const url = "http://localhost:3010/api/auth";
-    // const authInfo = {user: userName, pass: password};
 
     const req = new Request(url);
     const response = await fetch(req)
@@ -40,7 +39,7 @@ export default function LoginPage() {
     const user = result.find((user: User) => user.username === userName && user.password === password);
     
     if (user) {
-      navigate("/room-creation");
+      navigate("/join-create");
       if (!localStorage.getItem("logged_in")) 
         localStorage.setItem("logged_in", "true");
       console.log(localStorage.getItem("logged_in"));

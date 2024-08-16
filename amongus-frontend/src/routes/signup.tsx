@@ -45,7 +45,7 @@ export default function SignUpPage() {
     if (user) {
       window.alert("User Name already exists");
     } else {
-      navigate("/room-creation");
+      navigate("/join-create");
       if (!localStorage.getItem("logged_in")) 
         localStorage.setItem("logged_in", "true");
       console.log(localStorage.getItem("logged_in"));
