@@ -3,6 +3,21 @@ import taskController from '../controller/task.controller';
 import auth from '../config/auth';
 
 const taskRouter = Router();
+
+// TEMP GAME STUFF
+interface Game {
+  code: string;
+  players: string[];
+}
+const gamelist = {"abc123": {code: "abc123", players: ["player1", "player2"]} as Game};
+
+
+taskRouter.get('/game', (req, res) => {
+  gamelist["new456"] = {code: "abc123", players: ["player1", "player2"]} as Game;
+  res.json(gamelist);
+})
+
+
 // specifies the endpoint and the method to call
 taskRouter.get('/', taskController.getAll);
 

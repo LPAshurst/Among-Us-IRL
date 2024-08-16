@@ -13,37 +13,35 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState('')
   const navigate = useNavigate();
 
+  if (localStorage.getItem("logged_in") != "abc") {
+    navigate("/room-creation");
+  }
+
 
   async function LogInPressed() {
     setUsernameError('');
     setPasswordError('');
 
-    if (userName === '') 
+    if (userName === '')
       setUsernameError('Please enter a username');
     if (password === '')
       setPasswordError('Please enter a password');
-    
-    const url = "http://localhost:3010/api/auth";
-    // const authInfo = {user: userName, pass: password};
 
-    const req = new Request(url);
-    const response = await fetch(req)
+    const response = await fetch("http://localhost:3010/api/auth/login", {
+      method: "POST",
+      headers: {},
+      body: JSON.stringify({ username: userName, password }),
+    })
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-
     const data = await response.json();
 
-    const result = data.result;
-
-    const user = result.find((user: User) => user.username === userName && user.password === password);
-    
-    if (user) {
+    if (data) {
+      localStorage.setItem("logged_in", data);
+      console.log(data);
       navigate("/room-creation");
-      if (!localStorage.getItem("logged_in")) 
-        localStorage.setItem("logged_in", "true");
-      console.log(localStorage.getItem("logged_in"));
     } else {
       window.alert("User name or password not detected");
     }
@@ -56,22 +54,22 @@ export default function LoginPage() {
       <div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
         <AmongUsLogo />
       </div>
-      
+
       <div className="flex w-full h-screen justify-center items-center">
 
 
         <div className="flex flex-col w-4/5 h-1/2 bg-slate-200 md:h-2/5 md:w-1/2 mb-40 items-center rounded-lg">
           <p className="md:text-[35px] text-[25px] font-lusitana text-black p-2.5 font-bold">
-          Login
+            Login
           </p>
 
           <div className="flex w-2/3 h-10 border-2 border-red-950 rounded-md mt-5 ">
-            <input className="w-full rounded-md focus:outline-none p-1" placeholder="Enter username here" onChange={(ev) => {setUserName(ev.target.value); setUsernameError('');}} value={userName}/>
+            <input className="w-full rounded-md focus:outline-none p-1" placeholder="Enter username here" onChange={(ev) => { setUserName(ev.target.value); setUsernameError(''); }} value={userName} />
           </div>
           <div className="text-red-500 text-xs">{usernameError}</div>
 
           <div className="flex w-2/3 h-10 border-2 border-red-950 rounded-md mt-8">
-            <input className="w-full rounded-md focus:outline-none p-1 " placeholder="Enter password here" onChange={(ev) => {setPassword(ev.target.value); setPasswordError('');}} value={password}/>
+            <input className="w-full rounded-md focus:outline-none p-1 " placeholder="Enter password here" onChange={(ev) => { setPassword(ev.target.value); setPasswordError(''); }} value={password} />
           </div>
           <div className="text-red-500 text-xs">{passwordError}</div>
 
@@ -83,7 +81,7 @@ export default function LoginPage() {
 
           <div className="flex h-screen w-full items-end justify-end">
             <p className="md:text-[15px] text-[10px] font-lusitana text-black p-2.5">
-              No account? 
+              No account?
               <Link to={"/signup"}> sign up</Link>
             </p>
           </div>
@@ -91,7 +89,7 @@ export default function LoginPage() {
 
         </div>
       </div>
-      
+
     </>
   )
 

@@ -6,10 +6,10 @@ const userRouter = Router();
 // specifies the endpoint and the method to call
 userRouter.get('/', userController.getUsers);
 
-userRouter.get('/login', auth.getUserToken);
+userRouter.post('/login', auth.getUserToken);
 
 //change to post later
-userRouter.get('/create', auth.createNewUser);
+userRouter.post('/create', auth.createNewUser);
 
 // export the router
 export default userRouter;
