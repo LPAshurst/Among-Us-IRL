@@ -14,7 +14,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("logged_in") != "abc") {
+    if (localStorage.getItem("logged_in") != null) {
       navigate("/join-create");
     }
   }, []);
@@ -39,7 +39,8 @@ export default function LoginPage() {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-
+    
+    
     if (data) {
       localStorage.setItem("logged_in", data);
       console.log(data);
