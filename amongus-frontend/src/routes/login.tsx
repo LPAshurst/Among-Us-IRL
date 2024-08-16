@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import AmongUsLogo from "../ui/amongus_logo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../ui/types";
 
@@ -13,9 +13,11 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState('')
   const navigate = useNavigate();
 
-  if (localStorage.getItem("logged_in") != "abc") {
-    navigate("/room-creation");
-  }
+  useEffect(() => {
+    if (localStorage.getItem("logged_in") != "abc") {
+      navigate("/join-create");
+    }
+  }, []);
 
 
   async function LogInPressed() {
