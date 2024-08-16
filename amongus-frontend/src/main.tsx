@@ -8,7 +8,9 @@ import './index.css';
 import ErrorPage from "./errors/error-page";
 import LoginPage from './routes/login.tsx';
 import SignUpPage from './routes/signup.tsx';
-import GameCreation from './routes/game-creation.tsx';
+import JoinPage from './routes/game-join.tsx';
+import CreationPage from './routes/game-create.tsx';
+
 
 const router = createBrowserRouter(
 [
@@ -26,8 +28,12 @@ const router = createBrowserRouter(
     element: <SignUpPage />
   },
   {
-    path: "room-creation",
-    element: <GameCreation />
+    path: "join-create",
+    element: <JoinPage />
+  },
+  {
+    path: "create-game",
+    element: <CreationPage />
   }
 ]
 );

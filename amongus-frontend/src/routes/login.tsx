@@ -41,7 +41,7 @@ export default function LoginPage() {
     if (data) {
       localStorage.setItem("logged_in", data);
       console.log(data);
-      navigate("/room-creation");
+      navigate("/join-create");
     } else {
       window.alert("User name or password not detected");
     }
