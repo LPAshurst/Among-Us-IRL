@@ -3,17 +3,15 @@ import AmongUsLogo from "../ui/amongus_logo";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../ui/types";
-
+import { useEffect } from "react";
 
 export default function SignUpPage() {
 
-  console.log(localStorage.getItem("logged_in"))
-  if (localStorage.getItem("logged_in") === 'true') {
-
-    console.log("in here");
-    <Link to="/room-creation" >
-    </Link>
-  }
+  useEffect(() => {
+    if (localStorage.getItem("logged_in") != null) {
+      navigate("/join-create");
+    }
+  }, []);
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
