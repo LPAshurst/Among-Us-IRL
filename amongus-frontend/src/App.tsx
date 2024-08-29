@@ -2,10 +2,8 @@
 import './App.css';
 import AmongUsLogo from './ui/amongus_logo';
 
-
 // React imports
 import { Link } from 'react-router-dom';
-
 
 // Swiper imports
 import { Autoplay, Pagination} from 'swiper/modules';
@@ -20,7 +18,6 @@ import Zane_Lorenzo from './assets/zane_lorenzo.png'
 
 export default function App() {
 
-
   return (
     <>
       <div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
@@ -28,7 +25,7 @@ export default function App() {
       </div>
 
       <div className='flex w-full h-32 justify-center'>
-        <Link to="login"  className='self-end'>
+        <Link to="login" className='self-end'>
           <button className='bg-blue-900 w-28'>
             <span className='text-[20px] font-lusitana text-neutral-200'> Log in </span>
           </button>
