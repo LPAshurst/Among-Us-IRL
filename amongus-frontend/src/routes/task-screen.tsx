@@ -1,52 +1,104 @@
-import { useState } from "react";
-import Task from "../ui/task";
+import { styled } from '@mui/material/styles';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionSummary, {
+  AccordionSummaryProps,
+} from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+// import AmongUsLogo from '../ui/amongus_logo';
+import AmongUsDropDown from '../ui/amongus_drop_down';
+import { useState } from 'react';
 
-export default function TaskScreen() {
-  
-  const [tasks, updateTasks] = useState<Task[]>([]);
 
 
-  async function request_list() {
-    console.log("clicked")
-    try {
-      const response = await fetch("http://localhost:3010/api/tasks");
+const Accordion = styled((props: AccordionProps) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&::before': {
+    display: 'none',
+  },
+}));
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
+  <MuiAccordionSummary
+    expandIcon={<AmongUsDropDown />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor: 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+  ...theme.applyStyles('dark', {
+    backgroundColor: 'rgba(255, 255, 255, .05)',
+  }),
+}));
 
-      const data = await response.json();
-      const arr: Task[] = []
-      Object.values(data.result).forEach(value => arr.push(value as Task))
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
 
-      updateTasks(arr)
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  }
+export default function CustomizedAccordions() {
+  const [expanded, setExpanded] = useState<string | false>('panel1');
 
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
 
 
   return (
+    <div className='flex flex-col'>
+      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
 
-    
-    <main className="flex self-start h-screen  flex-col">
-      <div className="flex h-20 w-screen items-end rounded-lg bg-blue-900 p-4 md:h-52">
-        <h1>Task List</h1>
-      </div>
-      <button onClick={request_list} className="bg-blue-900 w-40 h-50 self-center mt-40"> Click me!!! </button>
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <h2 className="text-neutral-200">{task.name}</h2>
-            <p className="text-neutral-200">Location: {task.location}</p>
-            <p className="text-neutral-200">Difficulty: {task.difficulty}</p>
-          </li>
-        ))}
-      </ul>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography>Collapsible Group Item #1</Typography>
+        </AccordionSummary>
 
-    </main>
-    
-  )
+        <AccordionDetails>
+          <Typography >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          </Typography>
+        </AccordionDetails>
 
+      </Accordion>
+
+      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+
+        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+          <Typography>Collapsible Group Item #2</Typography>
+        </AccordionSummary>
+
+        <AccordionDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          </Typography>
+        </AccordionDetails>
+
+      </Accordion>
+
+      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
+
+        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
+          <Typography>Collapsible Group Item #3</Typography>
+        </AccordionSummary>
+
+        <AccordionDetails>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          </Typography>
+        </AccordionDetails>
+
+      </Accordion>
+    </div>
+  );
 }
