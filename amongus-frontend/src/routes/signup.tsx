@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../ui/types";
 import { useEffect } from "react";
+import Navbar from "../ui/navbar";
 
 export default function SignUpPage() {
 
@@ -53,9 +54,7 @@ export default function SignUpPage() {
 
   return (
     <>
-      <div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
-        <AmongUsLogo />
-      </div>
+      <Navbar />
       
       <div className="flex w-full h-screen justify-center items-center">
 

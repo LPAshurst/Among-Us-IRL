@@ -1,5 +1,6 @@
 import AmongUsLogo from "../ui/amongus_logo"
 import { useNavigate } from "react-router-dom";
+import Navbar from "../ui/navbar";
 
 export default function JoinPage() {
 
@@ -13,9 +14,7 @@ export default function JoinPage() {
 
 	return (
 		<> 
-			<div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
-        <AmongUsLogo />
-      </div>
+			<Navbar />
 
       <div className='flex w-full h-full flex-col items-center'>
 

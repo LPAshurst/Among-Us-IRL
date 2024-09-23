@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AmongUsLogo from "../ui/amongus_logo";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../ui/navbar";
 
 export default function LoginPage() {
 
@@ -52,9 +53,7 @@ export default function LoginPage() {
 
   return (
     <>
-      <div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
-        <AmongUsLogo />
-      </div>
+      <Navbar />
 
       <div className="flex w-full h-screen justify-center items-center">
 
