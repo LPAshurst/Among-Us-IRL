@@ -1,5 +1,4 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
-import AmongUsLogo from "../ui/amongus_logo"
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 

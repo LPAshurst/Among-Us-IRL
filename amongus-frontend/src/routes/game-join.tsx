@@ -1,4 +1,3 @@
-import AmongUsLogo from "../ui/amongus_logo"
 import { useNavigate } from "react-router-dom";
 import Navbar from "../ui/navbar";
 
