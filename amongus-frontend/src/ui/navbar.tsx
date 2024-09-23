@@ -10,7 +10,7 @@ export default function Navbar() {
     const navigate = useNavigate();
     function logout() {
         localStorage.removeItem("logged_in");
-        navigate("/login");
+        navigate("/");
     }
     function LogoutButton() {
         return (
