@@ -7,13 +7,15 @@ export default function AmongUsLogo() {
     <div
       className='flex flex-row justify-center items-center grow'
     >
-      <Link to="/"><img
+      <Link to="/">
+      <img
         src={red_among}
         width={45}
       />
       </Link>
 
-      <p className="text-[25px] font-lusitana text-neutral-200 p-2.5">Amog us in real life</p>
+      <p className="text-[25px] font-lusitana text-neutral-200 p-2.5 self-end">Amog us in real life</p>
+      
     </div>
   );
 }

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 
 
-export default function GameCopy () {
+export default function TaskCopy () {
 
   const [tasklist, setTasklist] = useState();
 
