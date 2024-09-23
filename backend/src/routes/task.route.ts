@@ -21,9 +21,11 @@ taskRouter.get('/game', (req, res) => {
 // specifies the endpoint and the method to call
 taskRouter.get('/', taskController.getAll);
 
-taskRouter.get('/', function (req, res) {
-  res.send('id: ' + req.query.id);
-});
+// taskRouter.get('/', function (req, res) {
+//   res.send('id: ' + req.query.id);
+// });
+
+taskRouter.get('/list', taskController.getExample);
 
 taskRouter.get('/user/:id', (req, res) => {
   taskController.getUserTasks(req, res, +req.params.id);

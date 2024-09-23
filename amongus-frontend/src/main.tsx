@@ -11,6 +11,7 @@ import SignUpPage from './routes/signup.tsx';
 import JoinPage from './routes/game-join.tsx';
 import CreationPage from './routes/game-create.tsx';
 import GameCopy from './routes/game-create-copy.tsx';
+import TaskScreen from './routes/task-screen.tsx';
 
 
 const router = createBrowserRouter(
@@ -39,6 +40,10 @@ const router = createBrowserRouter(
   {
     path: "copy",
     element: <GameCopy />
+  },
+  {
+    path: "game-page",
+    element: <TaskScreen />
   }
 ]
 );

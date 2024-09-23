@@ -25,6 +25,32 @@ const getAll = (req: Request, res: Response) => {
   });
 }
 
+const getExample = (req: Request, res: Response) => {
+  connection.getConnection((err: QueryError, conn: PoolConnection) => {
+
+    conn.query("select tasklist.name as listname, tasklist.*, task.* from tasklist LEFT JOIN task ON tasklist.id = task.list_id WHERE tasklist.id = 1", (err, resultSet: any) => {
+      conn.release();
+      if (err) {
+        console.error(err.message);
+        res.status(500).send({
+          message: 'INTERNAL SERVER ERROR',
+          result: null
+        });
+      } else {
+        let newres = {}
+        newres['id'] = 1
+        newres['name'] = resultSet[0].listname
+        let unwrap = ({name, location, difficulty, description}) => ({name, location, difficulty, description});
+        newres['entries'] = resultSet.map(unwrap);
+        res.status(200).send({
+          message: 'OK',
+          result: newres
+        });
+      }
+    })
+  });
+}
+
 const getUserTasks = (req: Request, res: Response, id: Number) => {
   connection.getConnection((err: QueryError, conn: PoolConnection) => {
     conn.query(format("SELECT * FROM task WHERE user_id = ?", [id]), (err, resultSet: Task[]) => {
@@ -46,4 +72,4 @@ const getUserTasks = (req: Request, res: Response, id: Number) => {
 }
 
 
-export default { getAll, getUserTasks }
+export default { getAll, getUserTasks, getExample }
