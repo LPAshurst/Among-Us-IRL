@@ -7,6 +7,16 @@
   position: fixed;
   overflow: hidden;
   touch-action: none; 
+  background-image: url('src/assets/space_background.png');
+}
+
+#task-accor {
+  margin-top: 1%;
+  display: flex;
+  width: 70%;
+  align-self: center;
+  height: auto;
+  flex-direction: column;
 }
 
 .swiper-slide {
@@ -50,6 +60,9 @@
   }
 }
 
+progress {
+  background-color: red;
+}
 .card {
   padding: 2em;
 }
