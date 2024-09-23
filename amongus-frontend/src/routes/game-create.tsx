@@ -1,10 +1,24 @@
-import { Box, Paper, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Button } from "@mui/material";
 import AmongUsLogo from "../ui/amongus_logo"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CreationPage() {
 
-  const [tasks, setTasks] = useState([{ name: "Check thingy", location: "Kitchen", difficulty: "Medium" }]);
+  const [tasklist, setTasklist] = useState();
+
+  
+  useEffect(() => {
+    fetch("http://localhost:3010/api/tasks/list", {
+      method: "GET",
+      mode: "cors"
+    }).then(response =>  {console.log(response); return response.json(); }
+    ).then(value => {
+      setTasklist(value.result);
+      console.log(value.result)
+    }).catch (err => {
+      console.error(err);
+    });
+  }, [])
 
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
@@ -26,7 +40,7 @@ export default function CreationPage() {
             <Box sx={{ border: '1px solid white', padding: 2, width: '15vw' }}>Location</Box>
             <Box sx={{ border: '1px solid white', padding: 2, width: '15vw' }}>Difficulty</Box>
           </Stack>
-          {tasks.map(item => (
+          {tasklist?.entries.map(item => (
             <Task name={item.name} location={item.location} difficulty={item.difficulty}></Task>
           ))}
         </Stack>
