@@ -3,8 +3,26 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { useEffect, useState } from 'react';
+
 
 export default function GameCopy () {
+
+  const [tasklist, setTasklist] = useState();
+
+  
+  useEffect(() => {
+    fetch("http://localhost:3010/api/tasks/list", {
+      method: "GET",
+      mode: "cors"
+    }).then(response =>  {console.log(response); return response.json(); }
+    ).then(value => {
+      setTasklist(value.result);
+      console.log(value.result)
+    }).catch (err => {
+      console.error(err);
+    });
+  }, []);
 
   return (
     
