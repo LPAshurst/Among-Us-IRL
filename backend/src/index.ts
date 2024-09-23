@@ -26,12 +26,12 @@ const io = new Server(server, {
 
 // Cors is not needed here because its added in the io server
 // body parser middleware
-// const corsOptions = {
-//   origin:'http://localhost:3000', 
-//   credentials:true, //access-control-allow-credentials:true
-//   optionSuccessStatus:200
-// }
-// app.use();
+const corsOptions = {
+  origin:'http://localhost:3000', 
+  credentials:true, //access-control-allow-credentials:true
+  optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
