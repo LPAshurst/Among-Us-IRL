@@ -1,6 +1,7 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
 import AmongUsLogo from "../ui/amongus_logo"
 import { useEffect, useState } from "react";
+import Navbar from "../ui/navbar";
 
 export default function CreationPage() {
 
@@ -11,8 +12,7 @@ export default function CreationPage() {
     fetch("http://localhost:3010/api/tasks/list", {
       method: "GET",
       mode: "cors"
-    }).then(response =>  {console.log(response); return response.json(); }
-    ).then(value => {
+    }).then(response => response.json()).then(value => {
       setTasklist(value.result);
       console.log(value.result)
     }).catch (err => {
@@ -59,9 +59,7 @@ export default function CreationPage() {
   const gameCode = getRandomInt(50000);
   return (
     <Box>
-      <div className="flex w-screen bg-blue-900 p-2 h-fit items-center justify-center">
-        <AmongUsLogo />
-      </div>
+      <Navbar />
 
       <div className='flex w-full h-full flex-col items-center'>
 
