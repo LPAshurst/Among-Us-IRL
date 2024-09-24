@@ -1,12 +1,13 @@
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody, TableRow, TableCell } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 
 export default function CreationPage() {
 
   const [tasklist, setTasklist] = useState();
+  const [players, setPlayers] = useState(['Zane', 'Lorenzo', 'Jackson']); //Remove default names later
 
-  
+
   useEffect(() => {
     fetch("http://localhost:3010/api/tasks/list", {
       method: "GET",
@@ -14,7 +15,7 @@ export default function CreationPage() {
     }).then(response => response.json()).then(value => {
       setTasklist(value.result);
       console.log(value.result)
-    }).catch (err => {
+    }).catch(err => {
       console.error(err);
     });
   }, [])
@@ -78,11 +79,24 @@ export default function CreationPage() {
               <Typography color="white">Players</Typography>
               <Typography color="white">(3/10)</Typography>
             </Box>
-            <Box sx={{ border: '1px solid white', height: '40vh', width: '25vh', padding: 2 }}>
+            {/* <Box sx={{ border: '1px solid white', height: '40vh', width: '25vh', padding: 2 }}>
               <Typography color="white">Jackson</Typography>
               <Typography color="white">Lorenzo</Typography>
               <Typography color="white">Zane</Typography>
-            </Box>
+            </Box> */}
+            <TableContainer component={Paper}>
+              <Table sx={{ border: '1px solid white', width: '25vh', padding: 2 }}>
+                <TableBody>
+                  {players.map((player) => (
+                    <TableRow key={player}><TableCell>{player}</TableCell></TableRow>
+                  ))}
+                  
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <Table sx={{ border: '1px solid white', width: '25vh', padding: 2 }}>
+
+            </Table>
             <Button variant="outlined">Game Settings</Button>
           </Box>
         </Stack>
