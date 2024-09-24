@@ -14,7 +14,7 @@ export default function Navbar() {
     }
     function LogoutButton() {
         return (
-            <Button onClick={logout} variant="contained" aria-label="logout" startIcon={<LogoutIcon />}>
+            <Button onClick={logout} variant="header" aria-label="logout" startIcon={<LogoutIcon />}>
                 Logout
             </Button>
         );

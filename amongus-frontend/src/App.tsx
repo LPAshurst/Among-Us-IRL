@@ -1,6 +1,5 @@
 // Local react and css
 import './App.css';
-import AmongUsLogo from './ui/amongus_logo';
 
 // React imports
 import { Link } from 'react-router-dom';

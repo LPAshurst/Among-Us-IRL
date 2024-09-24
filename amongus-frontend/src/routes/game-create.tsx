@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody, TableRow, TableCell } from "@mui/material";
+import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody, TableRow, TableCell, List, ListItemText } from "@mui/material";
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 
@@ -30,8 +30,8 @@ export default function CreationPage() {
         <Stack direction="row" sx={{ alignItems: 'center' }} display="flex" gap={2}>
           <Typography color="white">Tasks</Typography>
           <Box justifySelf="end" display="flex" gap={2}>
-            <Button variant="outlined">Load</Button>
-            <Button variant="outlined">Saves</Button>
+            <Button variant="outlined" color='secondary'>Load</Button>
+            <Button variant="outlined" color='secondary'>Saves</Button>
           </Box>
         </Stack>
         <Stack sx={{ p: 2, border: '1px solid white' }} spacing={0}>
@@ -72,7 +72,7 @@ export default function CreationPage() {
             <Stack spacing={20} direction={"row"}>
               <TaskContainer />
             </Stack>
-            <Button variant="outlined">Start</Button>
+            <Button variant="outlined" color='secondary'>Start</Button>
           </Box>
           <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
             <Box alignItems={"center"} display="flex" flexDirection="column">
@@ -84,7 +84,7 @@ export default function CreationPage() {
               <Typography color="white">Lorenzo</Typography>
               <Typography color="white">Zane</Typography>
             </Box> */}
-            <TableContainer component={Paper}>
+            {/* <TableContainer component={Paper}>
               <Table sx={{ border: '1px solid white', width: '25vh', padding: 2 }}>
                 <TableBody>
                   {players.map((player) => (
@@ -93,11 +93,13 @@ export default function CreationPage() {
                   
                 </TableBody>
               </Table>
-            </TableContainer>
-            <Table sx={{ border: '1px solid white', width: '25vh', padding: 2 }}>
-
-            </Table>
-            <Button variant="outlined">Game Settings</Button>
+            </TableContainer> */}
+            <List sx={{ border: '1px solid white', width: '25vh', padding: 2 }} component={Paper} elevation={0}>
+              {players.map((player) => (
+                <Paper elevation="1"><ListItemText><Typography fontFamily={"Comfortaa"}>{player}</Typography></ListItemText></Paper>
+              ))}
+            </List>
+            <Button variant="outlined" color='secondary'>Game Settings</Button>
           </Box>
         </Stack>
       </div >
