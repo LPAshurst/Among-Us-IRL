@@ -11,6 +11,7 @@ export default function Navbar() {
     function logout() {
         localStorage.removeItem("logged_in");
         navigate("/");
+        window.location.reload();
     }
     function LogoutButton() {
         return (
