@@ -1,4 +1,5 @@
-import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody, TableRow, TableCell, List, ListItemText } from "@mui/material";
+import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody, TableRow, TableCell, List, ListItemText, TableHead, IconButton } from "@mui/material";
+import ClearIcon from '@mui/icons-material/Clear';
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
 
@@ -25,6 +26,30 @@ export default function CreationPage() {
   }
 
   function TaskContainer() {
+    return (
+      <TableContainer component={Paper}>
+        <Table sx={{ padding: 2, minWidth: 500 }}>
+          <TableHead>
+            <TableRow>
+              <TableCell variant="head">Name</TableCell>
+              <TableCell variant="head">Description</TableCell>
+              <TableCell variant="head">Location</TableCell>
+              <TableCell variant="head"></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tasklist?.entries.map((task) => (
+              <TableRow key={task.id}>
+                <TableCell>{task.name}</TableCell>
+                <TableCell>{task.description}</TableCell>
+                <TableCell>{task.location}</TableCell>
+                <TableCell><IconButton aria-label="delete" variant="remove" size="small"><ClearIcon sx={{minWidth: 20, width: 20, minHeight: 20, height: 20,}} /></IconButton></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
     return (
       <Stack spacing={1.5}>
         <Stack direction="row" sx={{ alignItems: 'center' }} display="flex" gap={2}>
@@ -96,7 +121,7 @@ export default function CreationPage() {
             </TableContainer> */}
             <List sx={{ border: '1px solid white', width: '25vh', padding: 2 }} component={Paper} elevation={0}>
               {players.map((player) => (
-                <Paper elevation="1"><ListItemText><Typography fontFamily={"Comfortaa"}>{player}</Typography></ListItemText></Paper>
+                <Paper key={player} elevation={1}><ListItemText><Typography fontFamily={"Comfortaa"}>{player}</Typography></ListItemText></Paper>
               ))}
             </List>
             <Button variant="outlined" color='secondary'>Game Settings</Button>

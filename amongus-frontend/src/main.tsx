@@ -48,8 +48,7 @@ const router = createBrowserRouter(
     }
   ]
 );
-
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: '#1E3A8A',
@@ -58,6 +57,8 @@ const theme = createTheme({
       main: '#66aee8',
     },
   },
+});
+theme = createTheme(theme, {
   typography: {
     fontFamily: [
       'Lusitana',
@@ -68,12 +69,39 @@ const theme = createTheme({
     MuiButton: {
       variants: [
         {
-          props: {variant: 'header' },
+          props: { variant: 'header' },
           style: {
             color: 'black',
-            backgroundColor: '#66aee8',
+            backgroundColor: theme.palette.secondary.main,
             borderRadius: '20px',
             fontWeight: 700
+          }
+        },
+      ]
+    },
+    MuiIconButton: {
+      variants: [
+        {
+          props: { variant: 'remove' },
+          style: {
+            color: 'white',
+            backgroundColor: theme.palette.error.main,
+            minWidth: 20,
+            width: 20,
+            minHeight: 20,
+            height: 20,
+          },
+        }
+      ]
+    },
+    MuiTableCell: {
+      variants: [
+        {
+          props: { variant: 'head' },
+          style: {
+            backgroundColor: theme.palette.grey[400],
+            fontSize: "1.4em",
+            fontWeight: 600,
           }
         }
       ]
