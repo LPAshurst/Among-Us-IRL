@@ -53,6 +53,16 @@ io.on('connection', (socket) => {
     console.log('message: ' + msg);
     io.emit('chat message', 'whaddup gang')
   });
+
+  socket.on('join', (room) => {
+    console.log(`a user joined room ${room}`);
+    socket.join(room);
+  });
+
+  socket.on('room message', (msg, room) => {
+    console.log(`message to room ${room}: ${msg}`);
+    io.to(room).emit('chat message', msg);
+  });
 });
 
 
