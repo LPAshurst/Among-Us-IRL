@@ -6,6 +6,7 @@ import * as cors from 'cors';
 import { config } from 'dotenv';
 import { Server } from "socket.io";
 import { createServer } from 'http';
+import { game, populateGame } from './game-logic/GameLogic';
 
 config();
 
@@ -24,6 +25,11 @@ const io = new Server(server, {
   }
 });
 
+console.log(game);
+
+populateGame({"whatever": "stuff"}, game);
+
+console.log(game)
 // Cors is not needed here because its added in the io server
 // body parser middleware
 const corsOptions = {
@@ -46,6 +52,13 @@ io.on('connection', (socket) => {
   } else {
     console.log('a user connected');
   }
+
+  socket.on('game-information', (obj) =>{
+
+    populateGame(obj, game);
+
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -70,6 +83,9 @@ io.on('connection', (socket) => {
 // define app port
 const port = process.env.PORT || 3010;
 // start the server
+
+
+
 server.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);
 });
