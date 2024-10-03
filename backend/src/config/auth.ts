@@ -90,4 +90,22 @@ function authenticateToken(req, res, next) {
   });
 }
 
-export default { generateAccessToken, createNewUser, authenticateToken, getUserToken };
+function getUsername(id) {
+  connection.getConnection((err: QueryError, conn: PoolConnection) => {
+    conn.query(format("SELECT username FROM user WHERE username = ? AND password = ?", [req.body.username, req.body.password]), (err, resultSet: any) => {
+      conn.release();
+      // if (err) {
+      //   console.error(err.message);
+      //   res.status(500).send({
+      //     message: 'INTERNAL SERVER ERROR',
+      //     result: null
+      //   });
+      // } else {
+      //   const token = generateAccessToken(resultSet.id);
+      //   res.json(token);
+      // }
+    })
+  });
+}
+
+export default { generateAccessToken, createNewUser, authenticateToken, getUserToken, getUsername };

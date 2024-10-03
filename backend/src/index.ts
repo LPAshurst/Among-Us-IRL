@@ -49,6 +49,7 @@ app.use('/api', routes);
 
 // define socket.io methods
 io.on('connection', (socket) => {
+  // console.log(socket.handshake.auth.token);
   socket.on("reconnect", () => console.log("RECONNECTED"));
   if (socket.recovered) {
     console.log('a user recovered');
@@ -72,7 +73,8 @@ io.on('connection', (socket) => {
 
   socket.on('join', (room) => {
     console.log(`user has been added to room ${room}`);
-    game.players.push({username: "Testing", id: "", taskList: [], alive: false, role: ""})
+    const name = ""
+    game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
   });
 
   socket.on("requestTasks", (playerId: string) => {
