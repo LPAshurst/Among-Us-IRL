@@ -78,6 +78,7 @@ io.on('connection', (socket) => {
     console.log(`user has been added to room ${room}`);
     const name = ""
     game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
+    socket.join("room")
   });
 
   socket.on("requestTasks", (playerId: string) => {
