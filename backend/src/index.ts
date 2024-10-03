@@ -31,6 +31,9 @@ console.log(game);
 
 populateGame({"whatever": "stuff"}, game);
 
+const numTasks = 14;
+let numComplete = 0;
+
 console.log(game)
 // Cors is not needed here because its added in the io server
 // body parser middleware
@@ -76,14 +79,29 @@ io.on('connection', (socket) => {
   });
 
   socket.on("requestTasks", (playerId: string) => {
-    console.log(playerId);
+    
     if (game.players.hasOwnProperty(playerId)) {
+      socket.emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
     }
+  
+  });
+
+  socket.on("finishedTask", (playerId: string, taskTitle: string) => {
     
-    
+    if (game.players.hasOwnProperty(playerId)) {
+      const taskList = game.players[playerId].taskList
+      numComplete++;
+      for (const task of taskList) {
+        if (task.title == taskTitle) {
+          task.status = true;
+        }
+      }
+    }
+
+    socket.emit("totalTasks", numComplete, numTasks);
 
   });
 

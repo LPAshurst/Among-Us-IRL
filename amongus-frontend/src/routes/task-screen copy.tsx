@@ -58,6 +58,7 @@ export default function TaskCopy () {
 
   const [tasklist, setTasklist] = useState<Task[]>();
   const [tasksDone, setTasksDone] = useState(0);
+  const [numTasks, setNumTasks] = useState(100);
 
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -65,7 +66,14 @@ export default function TaskCopy () {
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
+  
 
+  socket.on("totalTasks", (numComplete, numTasks) => {
+    
+    setTasksDone(numComplete);
+    setNumTasks(numTasks);
+
+  });
   
 
   useEffect(() => {
@@ -82,13 +90,13 @@ export default function TaskCopy () {
   
   function finished_task(item: Task) {
     item.status = true
-    setTasksDone(tasksDone + 1);
+    socket.emit('finishedTask', localStorage.getItem("logged_in"), item.title);
   }
 
   return (
     
     <>
-      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / (tasklist ? tasklist.length : 100)) * 100} />
+      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / numTasks)  * 100} />
       <div id='task-accor'>
         {tasklist?.map(task => (
         <Accordion expanded={expanded === task.title && task.status!=true} onChange={handleChange(task.title)}>
