@@ -94,6 +94,14 @@ export const game: Game = {
       username:"Lorenzo",
       taskList: taskList,
       role:"imposter"
+    },
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjcyODEyNjEsImV4cCI6MTcyNzI4MzA2MX0.EOlfw6RDZWBtb4d0E2UPQzgJuavBt3IQxcn0pS-FSaU":
+    {
+      alive: true,
+      username: "Zane",
+      taskList: taskList,
+      role:"crewmate"
+
     }
 
   }
@@ -104,6 +112,4 @@ export function populateGame(game_info, game: Game) {
 
   game.code = game_info["whatever"];
   
-
-
 }
