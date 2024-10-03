@@ -10,11 +10,8 @@ import Typography from '@mui/material/Typography';
 import {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import AccordionActions from '@mui/material/AccordionActions';
-
-const TASK_STATUS = {
-  TODO: 1,
-  DONE: 2
-}
+import { Task } from '../types/GameTypes';
+import { socket } from '../socket';
 
 
 const Accordion = styled((props: AccordionProps) => (
@@ -59,7 +56,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function TaskCopy () {
 
-  const [tasklist, setTasklist] = useState();
+  const [tasklist, setTasklist] = useState<Task[]>();
   const [tasksDone, setTasksDone] = useState(0);
 
   const [expanded, setExpanded] = useState<string | false>(false);
@@ -72,50 +69,42 @@ export default function TaskCopy () {
   
 
   useEffect(() => {
-    fetch("http://localhost:3010/api/tasks/list", {
-      method: "GET",
-      mode: "cors"
-    }).then(response =>  {console.log(response); return response.json(); }
-    ).then(value => {
-      const withStatus = value.result;
-      withStatus.entries.forEach((task)=>{
-        task.status = TASK_STATUS.TODO;
-      })
-      setTasklist(withStatus);
-      console.log(withStatus)
-    }).catch (err => {
-      console.error(err);
+
+    socket.emit('requestTasks');
+    socket.on("receiveTasks", (userTaskList: Task[]) => {
+      setTasklist(userTaskList);
+      console.log(userTaskList);
+
     });
+
   }, []);
 
   
-  function finished_task(item) {
-
-    item.status = TASK_STATUS.DONE
+  function finished_task(item: Task) {
+    item.status = true
     setTasksDone(tasksDone + 1);
   }
-
 
   return (
     
     <>
-      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / (tasklist ? tasklist.entries.length : 100)) * 100} />
+      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / (tasklist ? tasklist.length : 100)) * 100} />
       <div id='task-accor'>
-        {tasklist?.entries.map(item => (
-        <Accordion expanded={expanded === item.name && item.status!=TASK_STATUS.DONE} onChange={handleChange(item.name)}>
-            <AccordionSummary disabled={item.status === TASK_STATUS.DONE}> 
-              <Typography>{item.name}</Typography>
+        {tasklist?.map(task => (
+        <Accordion expanded={expanded === task.title && task.status!=true} onChange={handleChange(task.title)}>
+            <AccordionSummary disabled={task.status === true}> 
+              <Typography>{task.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography sx={{fontWeight: 700}}>Description: </Typography>
               <Typography>
-                {item.description}
+                {task.description}
               </Typography>
               <Typography sx={{fontWeight: 700}}>Location: </Typography>
               <Typography>
-                {item.location}
+                {task.location}
               </Typography>
-              <AccordionActions onClick={() => finished_task(item)}>
+              <AccordionActions onClick={() => finished_task(task)}>
                 <Button>Finish Task</Button>
                 </AccordionActions>
             </AccordionDetails>

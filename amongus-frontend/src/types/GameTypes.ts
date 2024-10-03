@@ -8,9 +8,7 @@ export interface Task {
   difficulty: string;
 
 }
-
-
-interface Player {
+export interface Player {
   
   username: string;
   id: string;
@@ -20,22 +18,4 @@ interface Player {
 
 }
 
-interface Game {
-  code: string;
-  players: Player[];
-}
 
-export const game: Game = {
-
-  code:"",
-  players:[]
-
-}
-
-export function populateGame(game_info, game: Game) {
-
-  game.code = game_info["whatever"];
-  
-
-
-}

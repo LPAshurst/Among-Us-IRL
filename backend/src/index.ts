@@ -6,7 +6,7 @@ import * as cors from 'cors';
 import { config } from 'dotenv';
 import { Server } from "socket.io";
 import { createServer } from 'http';
-import { game, populateGame } from './game-logic/GameLogic';
+import { game, populateGame, Task } from './game-logic/GameLogic';
 
 config();
 
@@ -73,6 +73,71 @@ io.on('connection', (socket) => {
   socket.on('join', (room) => {
     console.log(`a user joined room ${room}`);
     socket.join(room);
+  });
+
+  socket.on("requestTasks", () => {
+
+    console.log("im here")
+    const taskList: Task[] = [
+      {
+        id: "1",
+        title: "Complete the project",
+        location: "Office",
+        description: "Finish the project by the end of the week.",
+        status: false,
+        difficulty: "Hard"
+      },
+      {
+        id: "2",
+        title: "Submit the report",
+        location: "Home",
+        description: "Submit the weekly report by Friday evening.",
+        status: false,
+        difficulty: "Medium"
+      },
+      {
+        id: "3",
+        title: "Attend team meeting",
+        location: "Conference Room",
+        description: "Discuss the next sprint and assign tasks.",
+        status: false,
+        difficulty: "Easy"
+      },
+      {
+        id: "4",
+        title: "Code review",
+        location: "Office",
+        description: "Review the latest code changes submitted by the team.",
+        status: false,
+        difficulty: "Medium"
+      },
+      {
+        id: "5",
+        title: "Prepare presentation",
+        location: "Home",
+        description: "Prepare slides for the upcoming project presentation.",
+        status: false,
+        difficulty: "Hard"
+      },
+      {
+        id: "6",
+        title: "Fix bugs",
+        location: "Office",
+        description: "Resolve high-priority bugs reported during testing.",
+        status: false,
+        difficulty: "Hard"
+      },
+      {
+        id: "7",
+        title: "Plan team-building event",
+        location: "Cafe",
+        description: "Organize a team-building event for next month.",
+        status: false,
+        difficulty: "Easy"
+      }
+    ];
+    socket.emit('receiveTasks', taskList);
+
   });
 
   socket.on('room message', (msg, room) => {
