@@ -75,7 +75,8 @@ export default function TaskCopy () {
 
   useEffect(() => {
 
-    socket.emit("join", "room")
+    socket.emit("join", "room");
+    
     socket.emit('requestTasks', localStorage.getItem("logged_in"));
     socket.on("receiveTasks", (userTaskList: Task[]) => {
       setTasklist(userTaskList);

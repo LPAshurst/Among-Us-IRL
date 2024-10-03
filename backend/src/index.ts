@@ -77,14 +77,14 @@ io.on('connection', (socket) => {
   socket.on('join', (room) => {
     console.log(`user has been added to room ${room}`);
     const name = ""
-    game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
+    // game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
     socket.join("room")
   });
 
   socket.on("requestTasks", (playerId: string) => {
-    
+    console.log("in here")
     if (game.players.hasOwnProperty(playerId)) {
-      socket.emit("totalTasks", numComplete, numTasks);
+      socket.to("room").emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
