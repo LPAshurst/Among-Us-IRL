@@ -71,8 +71,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join', (room) => {
-    console.log(`a user joined room ${room}`);
-    socket.join(room);
+    console.log(`user has been added to room ${room}`);
+    game.players.push({username: "Testing", id: "", taskList: [], alive: false, role: ""})
   });
 
   socket.on("requestTasks", () => {
