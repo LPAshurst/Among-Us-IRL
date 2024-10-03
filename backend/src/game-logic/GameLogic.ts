@@ -86,7 +86,7 @@ const taskList: Task[] = [
 
 export const game: Game = {
 
-  code:"1010101",
+  code:"room",
   players:{
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3Mjc5MTY2OTMsImV4cCI6MTcyNzkxODQ5M30.7xEj57t8M2Q8xEi5gGrXhQ9IleucBkNwjtxd0UQXeWw": 
     {

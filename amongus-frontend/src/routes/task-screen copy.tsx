@@ -51,9 +51,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-
-
-
 export default function TaskCopy () {
 
   const [tasklist, setTasklist] = useState<Task[]>();
@@ -78,6 +75,7 @@ export default function TaskCopy () {
 
   useEffect(() => {
 
+    socket.emit("join", "room")
     socket.emit('requestTasks', localStorage.getItem("logged_in"));
     socket.on("receiveTasks", (userTaskList: Task[]) => {
       setTasklist(userTaskList);
