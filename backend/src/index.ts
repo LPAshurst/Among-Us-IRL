@@ -14,13 +14,15 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000/"
+    origin: "http://localhost:3000",
+    credentials:true,
+    optionsSuccessStatus:200
   },
   connectionStateRecovery: {
     // the backup duration of the sessions and the packets
     maxDisconnectionDuration: 2 * 60 * 1000,
     // whether to skip middlewares upon successful recovery
-    skipMiddlewares: false,
+    skipMiddlewares: true,
   }
 });
 
@@ -41,10 +43,11 @@ app.use('/api', routes);
 
 // define socket.io methods
 io.on('connection', (socket) => {
+  socket.on("reconnect", () => console.log("RECONNECTED"));
   if (socket.recovered) {
     console.log('a user recovered');
   } else {
-    console.log('a user connected');
+    console.log(`a user connected: ${socket.id}`);
   }
   socket.on('disconnect', () => {
     console.log('user disconnected');

@@ -3,6 +3,7 @@ import './App.css';
 
 // React imports
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 // Swiper imports
 import { Autoplay, Pagination } from 'swiper/modules';
@@ -16,7 +17,31 @@ import red_among from './assets/red_among.png';
 import Zane_Lorenzo from './assets/zane_lorenzo.png'
 import Navbar from './ui/navbar';
 
+import { socket } from './socket';
+
 export default function App() {
+
+  useEffect(() => {
+    function onConnect() {
+      console.log("connected");
+    }
+
+    function onDisconnect() {
+      console.log("connected");
+    }
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+
+    socket.on('chat message', (msg) => {
+      console.log(msg);
+    })
+    socket.emit('chat message', "hello");
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+    };
+  }, []);
 
   return (
     <>
