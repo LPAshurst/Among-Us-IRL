@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import AmongUsLogo from "../ui/amongus_logo";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../ui/navbar";

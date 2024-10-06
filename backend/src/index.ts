@@ -74,13 +74,13 @@ io.on('connection', (socket) => {
     io.emit('chat message', 'whaddup gang')
   });
 
-  socket.on('join', (room) => {
+  socket.on('join', (room, username) => {
     console.log(`user has been added to room ${room}`);
-    const name = ""
     // game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
-    socket.join("room");
+    socket.join(room);
     const clients = io.sockets.adapter.rooms.get(room);
-    io.to("room").emit("clientList", Array.from(clients));
+    console.log(clients);
+    io.to(room).emit("clientList", username);
     
   });
 
