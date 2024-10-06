@@ -104,7 +104,7 @@ io.on('connection', (socket) => {
       }
     }
 
-    socket.to("room").emit("totalTasks", numComplete, numTasks);
+    io.to("room").emit("totalTasks", numComplete, numTasks);
 
   });
 

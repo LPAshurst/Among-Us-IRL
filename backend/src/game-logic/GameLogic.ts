@@ -88,14 +88,14 @@ export const game: Game = {
 
   code:"room",
   players:{
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3Mjc5MTY2OTMsImV4cCI6MTcyNzkxODQ5M30.7xEj57t8M2Q8xEi5gGrXhQ9IleucBkNwjtxd0UQXeWw": 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwMDk0ODYsImV4cCI6MTcyODAxMTI4Nn0.K40DkzRD7uCaqfGgcIHx6yoXRpc__qtsikAX_FtF9bY": 
     {
       alive:true,
       username:"Lorenzo",
       taskList: taskList,
       role:"imposter"
     },
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjcyODEyNjEsImV4cCI6MTcyNzI4MzA2MX0.EOlfw6RDZWBtb4d0E2UPQzgJuavBt3IQxcn0pS-FSaU":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwMDk0OTMsImV4cCI6MTcyODAxMTI5M30.D7Ag8UnQ5AnJq9R2vM1N5G5K1h5Z_ge6Zv4fAHQH-xg":
     {
       alive: true,
       username: "Zane",

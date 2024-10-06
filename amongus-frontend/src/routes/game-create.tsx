@@ -6,7 +6,7 @@ import Navbar from "../ui/navbar";
 export default function CreationPage() {
 
   const [tasklist, setTasklist] = useState();
-  const [players, setPlayers] = useState(['Zane', 'Lorenzo', 'Jackson']); //Remove default names later
+  const [players, setPlayers] = useState([]); //Remove default names later
 
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function CreationPage() {
           <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
             <Box alignItems={"center"} display="flex" flexDirection="column">
               <Typography color="white">Players</Typography>
-              <Typography color="white">(3/10)</Typography>
+              <Typography color="white">({players.length}/10)</Typography>
             </Box>
             {/* <Box sx={{ border: '1px solid white', height: '40vh', width: '25vh', padding: 2 }}>
               <Typography color="white">Jackson</Typography>

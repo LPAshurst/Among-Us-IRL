@@ -41,7 +41,7 @@ export default function LoginPage() {
     
     
     if (data) {
-      localStorage.setItem("logged_in", data);
+      localStorage.setItem("logged_in", userName);
       console.log(data);
       navigate("/join-create");
     } else {
