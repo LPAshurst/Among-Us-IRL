@@ -88,17 +88,17 @@ export const game: Game = {
 
   code:"room",
   players:{
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3Mjc5MTY2OTMsImV4cCI6MTcyNzkxODQ5M30.7xEj57t8M2Q8xEi5gGrXhQ9IleucBkNwjtxd0UQXeWw": 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwNzIyNTUsImV4cCI6MTcyODA3NDA1NX0.0of7chjAeAzV66MvfBBuKmgO_vH2S2AhkVIPPcPTYfo": 
     {
       alive:true,
       username:"Lorenzo",
       taskList: taskList,
       role:"imposter"
     },
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjcyODEyNjEsImV4cCI6MTcyNzI4MzA2MX0.EOlfw6RDZWBtb4d0E2UPQzgJuavBt3IQxcn0pS-FSaU":
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwNTc3NjIsImV4cCI6MTcyODA1OTU2Mn0.1yt4OBN0Wd5NRoUH2AQiuqmKcxV0poL9OtOvcXzkztM":
     {
       alive: true,
-      username: "Zane",
+      username: "Zane", 
       taskList: taskList,
       role:"crewmate"
 
