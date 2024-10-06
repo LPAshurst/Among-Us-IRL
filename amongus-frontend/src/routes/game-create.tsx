@@ -2,6 +2,8 @@ import { Box, Stack, Typography, Button, Table, TableContainer, Paper, TableBody
 import ClearIcon from '@mui/icons-material/Clear';
 import { useEffect, useState } from "react";
 import Navbar from "../ui/navbar";
+import { socket } from "../socket";
+
 
 export default function CreationPage() {
 
@@ -19,7 +21,18 @@ export default function CreationPage() {
     }).catch(err => {
       console.error(err);
     });
+
+    socket.emit("join", "room");
+
+    
   }, [])
+
+  socket.on("clientList", (clientList) => {
+
+    setPlayers(clientList);
+
+  });
+
 
   function getRandomInt(max: number) {
     return Math.floor(Math.random() * max);
@@ -87,7 +100,6 @@ export default function CreationPage() {
       <Navbar />
 
       <div className='flex w-full h-full flex-col items-center'>
-
 
         <p className="font-lusitana font-bold text-neutral-200 text-[15px] md:text-[20px] mt-2">
           Game Code: {gameCode}

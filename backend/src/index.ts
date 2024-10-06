@@ -78,13 +78,16 @@ io.on('connection', (socket) => {
     console.log(`user has been added to room ${room}`);
     const name = ""
     // game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
-    socket.join("room")
+    socket.join("room");
+    const clients = io.sockets.adapter.rooms.get(room);
+    io.to("room").emit("clientList", Array.from(clients));
+    
   });
 
   socket.on("requestTasks", (playerId: string) => {
     console.log("in here")
     if (game.players.hasOwnProperty(playerId)) {
-      socket.to("room").emit("totalTasks", numComplete, numTasks);
+      socket.emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
@@ -103,7 +106,6 @@ io.on('connection', (socket) => {
         }
       }
     }
-
     io.to("room").emit("totalTasks", numComplete, numTasks);
 
   });
