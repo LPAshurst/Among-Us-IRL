@@ -39,8 +39,8 @@ const getExample = (req: Request, res: Response) => {
       } else {
         let newres = {}
         newres['id'] = 1
-        newres['name'] = resultSet[0].listname
-        let unwrap = ({id, name, location, difficulty, description}) => ({id, name, location, difficulty, description});
+        newres['title'] = resultSet[0].title
+        let unwrap = ({id, title, location, difficulty, description}) => ({id, title, location, difficulty, description});
         newres['entries'] = resultSet.map(unwrap);
         res.status(200).send({
           message: 'OK',

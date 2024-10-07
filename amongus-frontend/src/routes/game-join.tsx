@@ -16,7 +16,7 @@ export default function JoinPage() {
   }, []);
 
   function joinRoom(roomcode: string) {
-    socket.emit("join", roomcode);
+    socket.emit("join", roomcode, localStorage.getItem("logged_in"));
   }
 
   function navToCreation() {
@@ -49,7 +49,7 @@ export default function JoinPage() {
           value={inputCode}
           onChange={(e) => setInputCode(e.target.value)}>
         </input>
-        <Button onClick={()=>{joinRoom(inputCode)}} variant='header' aria-label="join">Join Game</Button>
+        <Button onClick={()=>{joinRoom(inputCode)}} variant="contained" aria-label="join">Join Game</Button>
 
       </div >
     </>

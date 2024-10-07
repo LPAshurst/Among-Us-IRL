@@ -81,7 +81,10 @@ io.on('connection', (socket) => {
     //TODO - check if game has already started, fail if so
     game.players[pid] = {username: name, taskList: [], alive: false, role:""};
     console.log(`user ${pid} has been added to room ${room}`);
-    socket.join("room");
+    socket.join(room);
+    const clients = io.sockets.adapter.rooms.get(room);
+    console.log(clients);
+    io.to(room).emit("clientList", name);
   });
 
   socket.on("requestTasks", (playerId: string) => {
@@ -106,8 +109,7 @@ io.on('connection', (socket) => {
         }
       }
     }
-
-    socket.to("room").emit("totalTasks", numComplete, numTasks);
+    io.to("room").emit("totalTasks", numComplete, numTasks);
 
   });
 

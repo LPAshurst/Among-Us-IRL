@@ -67,6 +67,7 @@ export default function TaskCopy () {
 
   socket.on("totalTasks", (numComplete, numTasks) => {
     
+    console.log("settings the tasks");
     setTasksDone(numComplete);
     setNumTasks(numTasks);
 
