@@ -78,19 +78,19 @@ export default function TaskCopy () {
 
     socket.emit("join", "room");
     
-    socket.emit('requestTasks', localStorage.getItem("logged_in"));
     socket.on("receiveTasks", (userTaskList: Task[]) => {
       setTasklist(userTaskList);
       console.log(userTaskList);
 
     });
+    socket.emit('requestTasks');
 
   }, []);
 
   
   function finished_task(item: Task) {
     item.status = true
-    socket.emit('finishedTask', localStorage.getItem("logged_in"), item.title);
+    socket.emit('finishedTask', item.title);
   }
 
   return (

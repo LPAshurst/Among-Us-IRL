@@ -17,8 +17,8 @@ const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
-    credentials:true,
-    optionsSuccessStatus:200
+    credentials: true,
+    optionsSuccessStatus: 200
   },
   connectionStateRecovery: {
     // the backup duration of the sessions and the packets
@@ -30,7 +30,7 @@ const io = new Server(server, {
 
 console.log(game);
 
-populateGame({"whatever": "stuff"}, game);
+populateGame({ "whatever": "stuff" }, game);
 
 const numTasks = 14;
 let numComplete = 0;
@@ -39,9 +39,9 @@ console.log(game)
 // Cors is not needed here because its added in the io server
 // body parser middleware
 const corsOptions = {
-  origin:'http://localhost:3000', 
-  credentials:true, //access-control-allow-credentials:true
-  optionSuccessStatus:200
+  origin: 'http://localhost:3000',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
@@ -61,10 +61,8 @@ io.on('connection', (socket) => {
     console.log(`a user connected: ${socket.id}`);
   }
 
-  socket.on('game-information', (obj) =>{
-
+  socket.on('game-information', (obj) => {
     populateGame(obj, game);
-
   });
 
   socket.on('disconnect', () => {
@@ -77,29 +75,31 @@ io.on('connection', (socket) => {
 
   socket.on('join', async (room) => {
     let pid = auth.unwrapToken(socket.handshake.auth.token);
-    const name = await auth.getUsername(pid);
-    //TODO - check if game has already started, fail if so
-    game.players[pid] = {username: name, taskList: [], alive: false, role:""};
-    console.log(`user ${pid} has been added to room ${room}`);
+    if (!game.started && !(pid in game.players)) { //check if game has already started, fail if so, TODO then error. Check if already in game
+      const name = await auth.getUsername(pid);
+      game.players[pid] = { username: name, taskList: [], alive: false, role: "" };
+      console.log(`user ${pid} has been added to game`);
+    }
     socket.join(room);
-    const clients = io.sockets.adapter.rooms.get(room);
+    // const clients = io.sockets.adapter.rooms.get(room);
+    const clients = Object.values(game.players).map((val) => val.username); //return playerlist from game object
     console.log(clients);
-    io.to(room).emit("clientList", name);
+    io.to(room).emit("clientList", clients);
   });
 
-  socket.on("requestTasks", (playerId: string) => {
-    console.log("in here")
+  socket.on("requestTasks", () => {
+    // console.log("in here")
+    let playerId = auth.unwrapToken(socket.handshake.auth.token);
     if (game.players.hasOwnProperty(playerId)) {
       io.to("room").emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
     }
-  
   });
 
-  socket.on("finishedTask", (playerId: string, taskTitle: string) => {
-    
+  socket.on("finishedTask", (taskTitle: string) => {
+    let playerId = auth.unwrapToken(socket.handshake.auth.token);
     if (game.players.hasOwnProperty(playerId)) {
       const taskList = game.players[playerId].taskList
       numComplete++;
