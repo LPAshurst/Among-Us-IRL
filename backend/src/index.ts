@@ -7,6 +7,7 @@ import { config } from 'dotenv';
 import { Server } from "socket.io";
 import { createServer } from 'http';
 import { game, populateGame, Task } from './game-logic/GameLogic';
+import auth from './config/auth';
 
 config();
 
@@ -74,17 +75,19 @@ io.on('connection', (socket) => {
     io.emit('chat message', 'whaddup gang')
   });
 
-  socket.on('join', (room) => {
-    console.log(`user has been added to room ${room}`);
-    const name = ""
-    // game.players[socket.handshake.auth.token] = {username: name, taskList: [], alive: false, role:""}
-    socket.join("room")
+  socket.on('join', async (room) => {
+    let pid = auth.unwrapToken(socket.handshake.auth.token);
+    const name = await auth.getUsername(pid);
+    //TODO - check if game has already started, fail if so
+    game.players[pid] = {username: name, taskList: [], alive: false, role:""};
+    console.log(`user ${pid} has been added to room ${room}`);
+    socket.join("room");
   });
 
   socket.on("requestTasks", (playerId: string) => {
     console.log("in here")
     if (game.players.hasOwnProperty(playerId)) {
-      socket.to("room").emit("totalTasks", numComplete, numTasks);
+      io.to("room").emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
