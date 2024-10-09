@@ -73,6 +73,12 @@ function getUserToken(req, res) {
           message: 'INTERNAL SERVER ERROR',
           result: null
         });
+      } else if (resultSet.length == 0) {
+        console.error("Failed login attempt");
+        res.status(401).send({
+          message: 'INVALID LOGIN CREDENTIALS',
+          result: null
+        });
       } else {
         const token = generateAccessToken(resultSet[0].id);
         res.json(token);
