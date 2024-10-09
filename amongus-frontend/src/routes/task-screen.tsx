@@ -1,14 +1,17 @@
+import LinearProgress from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
 import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-// import AmongUsLogo from '../ui/amongus_logo';
-import AmongUsDropDown from '../ui/amongus_drop_down';
-import { useState } from 'react';
-
+import {useEffect, useState} from 'react';
+import Button from '@mui/material/Button';
+import AccordionActions from '@mui/material/AccordionActions';
+import { Task } from '../types/GameTypes';
+import { socket } from '../socket';
 
 
 const Accordion = styled((props: AccordionProps) => (
@@ -25,11 +28,11 @@ const Accordion = styled((props: AccordionProps) => (
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
   <MuiAccordionSummary
-    expandIcon={<AmongUsDropDown />}
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
     {...props}
   />
 ))(({ theme }) => ({
-  backgroundColor: 'rgba(0, 0, 0, .03)',
+  backgroundColor: 'rgba(200, 200, 200, 1)',
   flexDirection: 'row-reverse',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
@@ -47,58 +50,85 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function CustomizedAccordions() {
-  const [expanded, setExpanded] = useState<string | false>('panel1');
+
+export default function TaskScreen () {
+
+  const [tasklist, setTasklist] = useState<Task[]>();
+  const [tasksDone, setTasksDone] = useState(0);
+  const [numTasks, setNumTasks] = useState(100);
+
+  const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
+  
 
+  socket.on("totalTasks", (numComplete, numTasks) => {
+    
+    console.log("settings the tasks");
+    setTasksDone(numComplete);
+    setNumTasks(numTasks);
+
+  });
+  
+
+  useEffect(() => {
+
+    socket.emit("join", "room");
+    
+    socket.on("receiveTasks", (userTaskList: Task[]) => {
+      setTasklist(userTaskList);
+      console.log(userTaskList);
+
+    });
+    socket.emit('requestTasks');
+
+  }, []);
+
+  
+  function finished_task(item: Task) {
+    item.status = true
+    socket.emit('finishedTask', item.title);
+  }
 
   return (
-    <div className='flex flex-col'>
-      <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+    
+    <>
+      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / numTasks)  * 100} />
+      <div id='task-accor'>
+        {tasklist?.map(task => (
+        <Accordion expanded={expanded === task.title && task.status!=true} onChange={handleChange(task.title)}>
+            <AccordionSummary disabled={task.status === true}> 
+              <Typography>{task.title}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography sx={{fontWeight: 700}}>Description: </Typography>
+              <Typography>
+                {task.description}
+              </Typography>
+              <Typography sx={{fontWeight: 700}}>Location: </Typography>
+              <Typography>
+                {task.location}
+              </Typography>
+              <AccordionActions onClick={() => finished_task(task)}>
+                <Button>Finish Task</Button>
+                </AccordionActions>
+            </AccordionDetails>
+          </Accordion>
+      ))}
+    
+      </div>
+    
 
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Collapsible Group Item #1</Typography>
-        </AccordionSummary>
+    </>
 
-        <AccordionDetails>
-          <Typography >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          </Typography>
-        </AccordionDetails>
+  )
 
-      </Accordion>
 
-      <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
 
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Collapsible Group Item #2</Typography>
-        </AccordionSummary>
 
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          </Typography>
-        </AccordionDetails>
 
-      </Accordion>
 
-      <Accordion expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-
-        <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
-        </AccordionSummary>
-
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          </Typography>
-        </AccordionDetails>
-
-      </Accordion>
-    </div>
-  );
 }
