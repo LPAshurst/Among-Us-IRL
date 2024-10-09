@@ -38,7 +38,7 @@ const router = createBrowserRouter(
       element: <CreationPage />
     },
     {
-      path: "game",
+      path: "game/:room",
       element: <TaskScreen />
     }
   ]

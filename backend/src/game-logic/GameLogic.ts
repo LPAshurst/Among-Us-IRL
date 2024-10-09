@@ -112,6 +112,6 @@ export const game: Game = {
 
 export function populateGame(game_info, game: Game) {
 
-  game.code = game_info["whatever"];
+  game.code = game_info["code"];
   
 }

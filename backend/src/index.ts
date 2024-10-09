@@ -30,7 +30,7 @@ const io = new Server(server, {
 
 console.log(game);
 
-populateGame({ "whatever": "stuff" }, game);
+populateGame({ "code": "room" }, game);
 
 const numTasks = 14;
 let numComplete = 0;
@@ -74,13 +74,13 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join', async (room) => {
+    socket.join(room);
     let pid = auth.unwrapToken(socket.handshake.auth.token);
     if (!game.started && !(pid in game.players)) { //check if game has already started, fail if so, TODO then error. Check if already in game
       const name = await auth.getUsername(pid);
       game.players[pid] = { username: name, taskList: [], alive: false, role: "" };
       console.log(`user ${pid} has been added to game`);
     }
-    socket.join(room);
     // const clients = io.sockets.adapter.rooms.get(room);
     const clients = Object.values(game.players).map((val) => val.username); //return playerlist from game object
     console.log(clients);
@@ -91,7 +91,8 @@ io.on('connection', (socket) => {
     // console.log("in here")
     let playerId = auth.unwrapToken(socket.handshake.auth.token);
     if (game.players.hasOwnProperty(playerId)) {
-      io.to("room").emit("totalTasks", numComplete, numTasks);
+      console.log(game.code);
+      io.to(game.code).emit("totalTasks", numComplete, numTasks);
       socket.emit('receiveTasks', game.players[playerId].taskList);
     } else {
       console.log("i dont have that xD")
@@ -109,7 +110,7 @@ io.on('connection', (socket) => {
         }
       }
     }
-    io.to("room").emit("totalTasks", numComplete, numTasks);
+    io.to(game.code).emit("totalTasks", numComplete, numTasks);
 
   });
 

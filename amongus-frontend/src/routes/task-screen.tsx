@@ -7,11 +7,12 @@ import MuiAccordionSummary, {
 } from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import AccordionActions from '@mui/material/AccordionActions';
 import { Task } from '../types/GameTypes';
 import { socket } from '../socket';
+import { useParams } from 'react-router-dom';
 
 
 const Accordion = styled((props: AccordionProps) => (
@@ -51,7 +52,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 
-export default function TaskScreen () {
+export default function TaskScreen() {
 
   const [tasklist, setTasklist] = useState<Task[]>();
   const [tasksDone, setTasksDone] = useState(0);
@@ -59,76 +60,69 @@ export default function TaskScreen () {
 
   const [expanded, setExpanded] = useState<string | false>(false);
 
-  const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+  const { room } = useParams();
+
+  const handleChange = (panel: string) =>
+    (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
-  
-
-  socket.on("totalTasks", (numComplete, numTasks) => {
-    
-    console.log("settings the tasks");
-    setTasksDone(numComplete);
-    setNumTasks(numTasks);
-
-  });
-  
 
   useEffect(() => {
-
-    socket.emit("join", "room");
+    console.log(`Room Code: ${room}`);
     
+    socket.emit("join", room);
+
+    socket.on("totalTasks", (numComplete, numTasks) => {
+      console.log("settings the tasks");
+      setTasksDone(numComplete);
+      setNumTasks(numTasks);
+    });
+
     socket.on("receiveTasks", (userTaskList: Task[]) => {
       setTasklist(userTaskList);
       console.log(userTaskList);
-
     });
+
     socket.emit('requestTasks');
+
+    return () => {
+      //Unmount the callbacks with socket.off
+    };
 
   }, []);
 
-  
+
   function finished_task(item: Task) {
     item.status = true
     socket.emit('finishedTask', item.title);
   }
 
   return (
-    
     <>
-      <LinearProgress variant="determinate" sx={{height: '5%', alignSelf: "center", width: "80%", marginTop: "3%"}} value={(tasksDone / numTasks)  * 100} />
+      <LinearProgress variant="determinate" sx={{ height: '5%', alignSelf: "center", width: "80%", marginTop: "3%" }} value={(tasksDone / numTasks) * 100} />
       <div id='task-accor'>
         {tasklist?.map(task => (
-        <Accordion expanded={expanded === task.title && task.status!=true} onChange={handleChange(task.title)}>
-            <AccordionSummary disabled={task.status === true}> 
+          <Accordion expanded={expanded === task.title && !task.status} onChange={handleChange(task.title)}>
+            <AccordionSummary disabled={task.status === true}>
               <Typography>{task.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography sx={{fontWeight: 700}}>Description: </Typography>
+              <Typography sx={{ fontWeight: 700 }}>Description: </Typography>
               <Typography>
                 {task.description}
               </Typography>
-              <Typography sx={{fontWeight: 700}}>Location: </Typography>
+              <Typography sx={{ fontWeight: 700 }}>Location: </Typography>
               <Typography>
                 {task.location}
               </Typography>
               <AccordionActions onClick={() => finished_task(task)}>
                 <Button>Finish Task</Button>
-                </AccordionActions>
+              </AccordionActions>
             </AccordionDetails>
           </Accordion>
-      ))}
-    
+        ))}
       </div>
-    
-
     </>
-
-  )
-
-
-
-
-
+  );
 
 }
