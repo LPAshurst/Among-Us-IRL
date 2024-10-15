@@ -10,6 +10,7 @@ import { game, populateGame, Task } from './game-logic/GameLogic';
 
 config();
 
+
 // get express application
 const app = express();
 const server = createServer(app);
@@ -80,6 +81,7 @@ io.on('connection', (socket) => {
     socket.join(room);
     const clients = io.sockets.adapter.rooms.get(room);
     console.log(clients);
+    console.log(socket.id);
     io.to(room).emit("clientList", username);
     
   });
