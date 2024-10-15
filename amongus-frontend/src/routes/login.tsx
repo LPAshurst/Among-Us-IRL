@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../ui/navbar";
+import { recreateSocket } from "../socket";
 
 export default function LoginPage() {
 
@@ -29,7 +30,7 @@ export default function LoginPage() {
 
     const response = await fetch("http://localhost:3010/api/auth/login", {
       method: "POST",
-      headers: {},
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: userName, password }),
     })
 
@@ -41,7 +42,8 @@ export default function LoginPage() {
     
     
     if (data) {
-      localStorage.setItem("logged_in", userName);
+      localStorage.setItem("logged_in", data);
+      recreateSocket();
       console.log(data);
       navigate("/join-create");
     } else {

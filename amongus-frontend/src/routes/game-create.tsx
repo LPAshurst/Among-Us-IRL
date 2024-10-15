@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function CreationPage() {
 
   const [tasklist, setTasklist] = useState<Task[]>([]);
-  const [players, setPlayers] = useState<Set<String>>(new Set()); 
+  const [players, setPlayers] = useState<Set<string>>(new Set()); 
   const navigate = useNavigate();
   const [gameCode, setGameCode] = useState<string>(""); 
 
@@ -37,9 +37,11 @@ export default function CreationPage() {
     }
   }, [])
 
-  socket.on("clientList", (clientUsername: string) => {
-    console.log(clientUsername);
-    setPlayers((players) => new Set(players).add(clientUsername));
+  // socket.on("clientList", (clientUsername: string) => {
+  socket.on("clientList", (clientList: string[]) => {
+    console.log(clientList);
+    setPlayers(new Set(clientList));
+    // setPlayers((players) => new Set(players).add(clientUsername));
     console.log(players);
   });
 

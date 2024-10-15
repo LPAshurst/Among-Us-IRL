@@ -21,6 +21,7 @@ interface Player {
 
 interface Game {
   code: string;
+  started: boolean;
   players: Record<string, Player>;
 }
 
@@ -87,19 +88,20 @@ const taskList: Task[] = [
 export const game: Game = {
 
   code:"room",
+  started:false,
   players:{
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwNzIyNTUsImV4cCI6MTcyODA3NDA1NX0.0of7chjAeAzV66MvfBBuKmgO_vH2S2AhkVIPPcPTYfo": 
+    2: 
     {
       alive:true,
       username:"Lorenzo",
-      taskList: taskList,
+      taskList: JSON.parse(JSON.stringify(taskList)),
       role:"imposter"
     },
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MjgwNTc3NjIsImV4cCI6MTcyODA1OTU2Mn0.1yt4OBN0Wd5NRoUH2AQiuqmKcxV0poL9OtOvcXzkztM":
+    1:
     {
       alive: true,
       username: "Zane", 
-      taskList: taskList,
+      taskList: JSON.parse(JSON.stringify(taskList)),
       role:"crewmate"
 
     }
@@ -110,6 +112,6 @@ export const game: Game = {
 
 export function populateGame(game_info, game: Game) {
 
-  game.code = game_info["whatever"];
+  game.code = game_info["code"];
   
 }

@@ -27,7 +27,7 @@ export default function App() {
     }
 
     function onDisconnect() {
-      console.log("connected");
+      console.log("disconnected");
     }
 
     socket.on('connect', onConnect);
