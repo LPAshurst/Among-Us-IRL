@@ -4,7 +4,7 @@ import red_among from '../assets/red_among.png';
 
 export default function AmongUsLogo() {
   return (
-    <div
+    <header
       className='flex flex-row justify-center items-center grow'
     >
       <Link to="/">
@@ -16,6 +16,6 @@ export default function AmongUsLogo() {
 
       <p className="text-[25px] font-lusitana text-neutral-200 p-2.5 self-end">Amog us in real life</p>
       
-    </div>
+    </header>
   );
 }

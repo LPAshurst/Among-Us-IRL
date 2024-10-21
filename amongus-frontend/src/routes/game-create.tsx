@@ -46,12 +46,12 @@ export default function CreationPage() {
   });
 
   function removeTask(taskId: string) {
-    document.getElementById(taskId)?.remove();
+    // document.getElementById(taskId)?.remove();
     
     const newTasks = tasklist?.filter((task) => {
       console.log(task.title);
       console.log(taskId);
-      return task.title !== taskId
+      return task.id !== taskId
     });
     console.log(newTasks);
     setTasklist(newTasks);
@@ -67,6 +67,7 @@ export default function CreationPage() {
       status: false,
       difficulty: "New Difficulty"
     }
+    console.log(newTask)
     setTasklist((prevTasklist) => (prevTasklist ? [...prevTasklist, newTask] : [newTask]));
   }
 
@@ -111,15 +112,16 @@ export default function CreationPage() {
               <TableCell variant="head"></TableCell>
             </TableRow>
           </TableHead>
+          
           <TableBody id={"table-body"}>
             {tasklist?.map((task) => (
-              <TableRow key={task.id} id={task.title} contentEditable suppressContentEditableWarning={true}>
+              <TableRow key={task.id} id={task.id} contentEditable suppressContentEditableWarning={true}>
                 <TableCell>{task.title}</TableCell>
                 <TableCell>{task.description}</TableCell>
                 <TableCell>{task.location}</TableCell>
                 <TableCell>{task.difficulty}</TableCell>
                 <TableCell>
-                  <IconButton variant="remove" aria-label="delete" size="small" onClick={() => {removeTask(task.title)}}>
+                  <IconButton variant="remove" aria-label="delete" size="small" onClick={() => {removeTask(task.id)}}>
                     <ClearIcon sx={{minWidth: 20, width: 20, minHeight: 20, height: 20}} />
                   </IconButton>
                 </TableCell>
