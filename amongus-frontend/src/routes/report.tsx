@@ -1,11 +1,58 @@
 import Navbar from "../ui/navbar";
-import { Typography } from "@mui/material";
+import { Typography  } from "@mui/material";
+import List from "@mui/material/List";
+import ListSubheader from '@mui/material/ListSubheader';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
 
 export default function Report() {
   return (
 
-    <>
+<>
         <Navbar />
+        <List
+        sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', marginLeft: "10px", listStyleType: "decimal"}}
+        component="ol"
+        aria-labelledby="nested-list-subheader"
+        subheader={
+          <ListSubheader component="div" id="nested-list-subheader">
+            Report for milestone 2
+          </ListSubheader>
+        }
+      > 
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mail" />
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Sent mailasdjalkdsjaljrslkjgdlkgjdlfkgjldkfgjldkfgjdlkjfgldkfgjldkfgjldkfjgldkfjgkdljfglkdfgjldkfgjldkfjgldkfjgldkjfgldkjfgldkjfglkj" />
+        </ListItem>
+      </List>
+
         <div style={{display: "flex", width: "100%", justifyContent:"center"}}>
           <ol type={"1"} start={1}>
             <li><Typography sx={{color: "white"}}>this is the url to our github repo which is shared with each other and the prof: http://github.com/...</Typography></li>
@@ -34,7 +81,6 @@ export default function Report() {
 
           </ol>
         </div>
-    </>
-
+</>
   )
 }
