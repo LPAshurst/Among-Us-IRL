@@ -11,6 +11,7 @@ import auth from './config/auth';
 
 config();
 
+
 // get express application
 const app = express();
 const server = createServer(app);

@@ -34,6 +34,7 @@ export default function LoginPage() {
       body: JSON.stringify({ username: userName, password }),
     })
 
+    // Response holds jwt response for log in
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
