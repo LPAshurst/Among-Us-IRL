@@ -12,6 +12,7 @@ import SignUpPage from './routes/signup.tsx';
 import JoinPage from './routes/game-join.tsx';
 import CreationPage from './routes/game-create.tsx';
 import TaskScreen from './routes/task-screen.tsx';
+import SurveyForm from './routes/survey.tsx';
 
 
 const router = createBrowserRouter(
@@ -40,6 +41,10 @@ const router = createBrowserRouter(
     {
       path: "game/:room",
       element: <TaskScreen />
+    },
+    {
+      path: "survey",
+      element: <SurveyForm />
     }
   ]
 );
