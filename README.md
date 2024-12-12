@@ -1,1 +1,2 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7mUW_K0J)
+# Among-Us-IRL
+This project is an implementation of Among Us IRL. It should allow users to play the game among us in real life.
