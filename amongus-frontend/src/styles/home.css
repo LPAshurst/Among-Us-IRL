@@ -1,0 +1,80 @@
+.home-btn-field {
+  display: flex;
+  width: 100vw;
+  height: 6.5rem;
+  justify-content: center;
+}
+
+.home-screen {
+  display: flex;
+  background-image: url("../assets/space_background.png");
+  flex-direction: column;
+  height: 90%;
+  
+}
+.home-btn {
+  background-color: rgb(30 58 138);
+  width: 7rem;
+}
+
+.home-btn-text {
+  font-family: Lusitana, sans-serif;
+  font-size: 20px;
+  color: rgb(229 229 229);
+}
+
+.swiper-container {
+  display: flex;
+  width: 100%;
+  height: 20%;
+  margin-top: 4.5rem;
+}
+
+.swiper {
+  width: 25%;
+}
+
+.swiper-slide img{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 7px;
+}
+
+.lorenzo-zane-container {
+  display: flex;
+  margin-top: 6.5rem;
+  justify-content: center;
+}
+
+.lorenzo-zane-pic {
+  border-radius: 0.5rem;
+  border-color: rgb(156 163 175);
+  border-width: 4px;
+}
+
+.lorenzo-zane-text {
+  font-family: Anton, sans-serif;
+  margin-left: 1.25rem;
+  margin-top: 1.25rem;
+  color: rgb(190, 190, 190);
+  font-size: x-large;
+}
+
+
+/* This is styles for smaller screens */
+@media (max-width: 768px) {
+
+  .swiper {
+    width: 90%;
+  }
+  .lorenzo-zane-text {
+    font-size: large;
+  }
+}

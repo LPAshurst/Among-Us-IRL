@@ -1,0 +1,6 @@
+.login-signup-screen {
+    display: flex;
+    background-image: url("../assets/space_background.png");
+    flex-direction: column;
+    height: 90%;
+}

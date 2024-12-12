@@ -1,13 +1,16 @@
 import { Button, Rating, TextField } from "@mui/material";
 import Navbar from "../ui/navbar";
+import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SurveyForm() {
+  const navigate = useNavigate();
 
 
-  function handleSubmit(event) {
-    // event.preventDefault();
+  function handleSubmit(event:FormEvent) {
+    event.preventDefault();
     console.log("Submitted");
-    window.location.reload();
+    navigate("../")
   }
 
   return (

@@ -55,7 +55,7 @@ CREATE TABLE `task` (
 
 
 INSERT INTO user VALUES (1, "Admin Zane", "donotcopy");
-INSERT INTO user VALUES (2, "Admin Lorenzo", "stupidhead");
+INSERT INTO user VALUES (2, "DropTopBoof", "awesomeguy");
 
 INSERT INTO tasklist (id, user_id, name) VALUES (1, 1, 'Example List 1');
 INSERT INTO task (list_id, title, location, difficulty, description) VALUES (1, 'Manage Wiring','Kitchen','Hard', 'Go to the kitchen and manage the wiring on the counter.');

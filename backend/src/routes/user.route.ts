@@ -3,13 +3,15 @@ import userController from '../controller/user.controller';
 import auth from '../config/auth';
 
 const userRouter = Router();
-// specifies the endpoint and the method to call
+
+// Get a list of all users TODO remove this
 userRouter.get('/', userController.getUsers);
 
+// Login the user and send the jwt token
 userRouter.post('/login', auth.getUserToken);
 
-//change to post later
+// Create a new user in the database
 userRouter.post('/create', auth.createNewUser);
 
-// export the router
+
 export default userRouter;

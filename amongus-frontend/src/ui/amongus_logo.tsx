@@ -1,21 +1,21 @@
 import { Link } from 'react-router-dom';
 import red_among from '../assets/red_among.png';
-
+import "../styles/banner.css"
 
 export default function AmongUsLogo() {
   return (
-    <header
-      className='flex flex-row justify-center items-center grow'
+    <div
+      className='banner-content'
     >
       <Link to="/">
       <img
         src={red_among}
-        width={45}
+        className='banner-img'
+        alt='Among us character'
       />
       </Link>
 
-      <p className="text-[25px] font-lusitana text-neutral-200 p-2.5 self-end">Amog us in real life</p>
-      
-    </header>
+      <h1 className="banner-text">Amog us in real life</h1>
+    </div>
   );
 }

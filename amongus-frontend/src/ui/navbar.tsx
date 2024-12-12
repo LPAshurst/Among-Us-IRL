@@ -3,30 +3,29 @@ import AmongUsLogo from "../ui/amongus_logo"
 import { Button } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-
-
+import "../styles/banner.css"
 
 export default function Navbar() {
     const navigate = useNavigate();
     function logout() {
         localStorage.removeItem("logged_in");
+        if (localStorage.getItem("room")) {
+            localStorage.removeItem("room");
+        }
         navigate("/");
         window.location.reload();
     }
     function LogoutButton() {
         return (
-            <Button onClick={logout} variant="header" aria-label="logout" startIcon={<LogoutIcon />}>
+            <Button className="logout-btn" onClick={logout} variant="header" aria-label="logout" startIcon={<LogoutIcon />}>
                 Logout
             </Button>
         );
     }
     return (
-        <div className="flex flex-row w-screen bg-blue-900 p-2 h-fit items-center justify-center">
-            <div className='flex-none min-w-28 h-14'></div>
+        <header className="banner">
             <AmongUsLogo />
-            <div className='flex flex-row justify-flex-end w-28 h-14'>
-                {(localStorage.getItem("logged_in") != null) ? (<LogoutButton />) : (<div />)}
-            </div>
-        </div>
+            {(localStorage.getItem("logged_in") != null) ? (<LogoutButton />) : (<div />)}
+        </header>
     );
 }

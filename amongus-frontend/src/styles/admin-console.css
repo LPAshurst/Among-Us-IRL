@@ -1,0 +1,94 @@
+.admin-screen {
+  /* background-image: url("../assets/Michelangelo_Creation_of_Adam.jpg"); */
+  height: 90%;
+  overflow-y: hidden;
+  background-image: url("../assets/adam_background.jpg");
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.countdown {
+  font-size: larger;
+}
+
+.meeting-button:focus {
+  outline: none;
+} 
+
+.voting-screen {
+  display: flex;
+  position: relative;
+  background-color: rgb(134, 131, 131);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,  -50%);
+  width: fit-content;
+  height: fit-content;
+  min-height: 50vh;
+  align-items: center;
+  border: 3px solid #000;
+  border-radius: 10%;
+  flex-direction: column;
+  padding: 3rem;
+}
+
+.radio-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-height: 300px; 
+}
+
+
+.radio-container > FormControlLabel {
+  width: auto; 
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0); }
+  25% { transform: translate(-50.5%, -50.5%) rotate(-0.2deg); }
+  50% { transform: translate(-49.5%, -49.5%) rotate(0.2deg); }
+  75% { transform: translate(-50.5%, -50.5%) rotate(-0.2deg); }
+}
+
+.change-color {
+  background-color: red; 
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+.meeting-button {
+  position: absolute;
+  border-radius: 50%; 
+  width: 20vw;
+  height: 20vw;  
+  top: 30vh;
+  left: 40vw;
+  border: 0;
+  color: white;
+  font-family: Avenir, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
+  background: red;
+  text-shadow: 0 3px 1px rgba(122,17,8,.8);
+  box-shadow: 0 8px 0 rgb(183,9,0), 
+    0 15px 20px rgba(0,0,0,.35);
+  text-transform: uppercase;
+  transition: .4s all ease-in;
+  outline: none; 
+  cursor: pointer;
+  text-align: center;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.meeting-button span {
+  position: relative;
+}
+
+.pressed { 
+  padding-top: 3px;
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 rgb(183,0,0),
+    0 8px 6px rgba(0,0,0,.45);
+}
+

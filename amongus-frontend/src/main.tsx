@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
@@ -12,10 +12,12 @@ import SignUpPage from './routes/signup.tsx';
 import JoinPage from './routes/game-join.tsx';
 import CreationPage from './routes/game-create.tsx';
 import TaskScreen from './routes/task-screen.tsx';
-import SurveyForm from './routes/survey.tsx';
 import Report from './routes/report.tsx';
+import WaitingRoom from './routes/waiting-room.tsx';
+import SurveyForm from './routes/survey.jsx';
+import AdminConsole from './routes/admin-console.tsx';
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   [
     {
       path: "/",
@@ -43,15 +45,34 @@ const router = createBrowserRouter(
       element: <TaskScreen />
     },
     {
+      path: "report",
+      element: <Report />
+    },
+    {
+      path: "waiting-room",
+      element: <WaitingRoom />
+    },
+    {
       path: "survey",
       element: <SurveyForm />
     },
     {
-      path: "report",
-      element: <Report />
+      path: "admin-console/:room",
+      element: <AdminConsole />
     }
   ]
 );
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    header: true;
+  }
+}
+declare module '@mui/material/IconButton' {
+  interface ButtonPropsVariantOverrides {
+    remove: true;
+  }
+}
+
 let theme = createTheme({
   palette: {
     primary: {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Task } from '../model/task';
+import Task from '../model/task';
 import { connection } from '../config/db';
 import { QueryError, PoolConnection, format } from 'mysql2';
 

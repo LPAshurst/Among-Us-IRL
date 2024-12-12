@@ -1,5 +1,6 @@
 // Local react and css
 import './App.css';
+import "./styles/home.css"
 
 // React imports
 import { Link } from 'react-router-dom';
@@ -46,68 +47,66 @@ export default function App() {
   return (
     <>
       <Navbar />
-
-      <div className='flex w-full h-32 justify-center'>
-        {(localStorage.getItem("logged_in") != null) ?
-          (<Link to="join-create" className='self-end'>
-            <button className='bg-blue-900 w-28'>
-              <span className='text-[20px] font-lusitana text-neutral-200'> Play </span>
-            </button>
-          </Link>) :
-          (<><Link to="login" className='self-end'>
-            <button className='bg-blue-900 w-28'>
-              <span className='text-[20px] font-lusitana text-neutral-200'> Log in </span>
-            </button>
-          </Link>
-            <Link to="signup" className='self-end ml-5'>
-              <button className='bg-blue-900 w-28'>
-                <span className='text-[20px] font-lusitana text-neutral-200'> Sign up </span>
+      <main className='home-screen'>
+        <div className='home-btn-field'>
+          {(localStorage.getItem("logged_in") != null) ?
+            (<Link to="join-create" className='self-end'>
+              <button className='home-btn'>
+                <span className='home-btn-text'> Play </span>
+              </button>
+            </Link>) :
+            (<><Link to="login" className='self-end'>
+              <button className='home-btn'>
+                <span className='home-btn-text'> Log in </span>
               </button>
             </Link>
-          </>)}
-      </div>
+              <Link to="signup" className='self-end ml-5'>
+                <button className='home-btn'>
+                  <span className='home-btn-text'> Sign up </span>
+                </button>
+              </Link>
+            </>)}
+        </div>
 
-      <div className='flex w-full h-1/5 mt-20 '>
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={3}
-          centeredSlides={true}
-          slidesPerView={1.5}
-          loop={true}
-          pagination={
-            {
-              clickable: true
+        <div className='swiper-container'>
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={3}
+            centeredSlides={true}
+            slidesPerView={1.5}
+            loop={true}
+            pagination={
+              {
+                clickable: true
+              }
             }
-          }
-          autoplay={
-            {
-              delay: 4500,
-              disableOnInteraction: false,
+            autoplay={
+              {
+                delay: 4500,
+                disableOnInteraction: false,
 
+              }
             }
-          }
-          className='md:w-1/4 w-11/12'
-        >
+            className='swiper'
+          >
+            <SwiperSlide ><img src={"https://cdn.jackboxgames.com/banner-images/naughty-pack.png"} alt='Jackbox picture' /></SwiperSlide>
+            <SwiperSlide><img src={red_among} alt='Among us character'/></SwiperSlide>
+            <SwiperSlide><img src={red_among} alt='Among us character'/></SwiperSlide>
+            <SwiperSlide><img src={red_among} alt='Among us character'/></SwiperSlide>
+            <SwiperSlide><img src={red_among} alt='Among us character'/></SwiperSlide>
 
-          <SwiperSlide><img src={"https://cdn.jackboxgames.com/banner-images/naughty-pack.png"} /></SwiperSlide>
-          <SwiperSlide><img src={red_among} /></SwiperSlide>
-          <SwiperSlide><img src={red_among} /></SwiperSlide>
-          <SwiperSlide><img src={red_among} /></SwiperSlide>
-          <SwiperSlide><img src={red_among} /></SwiperSlide>
+          </Swiper>
+        </div>
 
-        </Swiper>
-      </div>
+        <div className='lorenzo-zane-container'>
+          <img src={Zane_Lorenzo} width={150} className='lorenzo-zane-pic' alt='Picture of Zane and Lorenzo on a golf cart :3'></img>
+          <p className='lorenzo-zane-text'>
+            Lorenzo and Zane<br></br>
+            <span style={{marginLeft: "1rem"}}>Productions</span>
+          </p>
 
-      <div className='flex mt-28 justify-center'>
-        <img src={Zane_Lorenzo} width={150} className='rounded-lg border-gray-400 border-4'></img>
-        <p className='font-anton ml-5 mt-5 text-neutral-400'>
-          Lorenzo and Zane<br></br>
-          <span className='ml-4'>Productions</span>
-        </p>
-
-      </div>
-
-
+        </div>
+      </main>
     </>
   );
 }

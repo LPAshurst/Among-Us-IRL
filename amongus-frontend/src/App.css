@@ -1,35 +1,8 @@
+
 #root {
-  display: flex;
   height: 100vh;
   width: 100vw;
-  background-color: #121212;
-  flex-direction: column;
-  position: fixed;
-  overflow: hidden;
-  touch-action: none; 
-  background-image: url('src/assets/space_background.png');
-}
-
-#task-accor {
-  margin-top: 1%;
-  display: flex;
-  width: 70%;
-  align-self: center;
-  height: auto;
-  flex-direction: column;
-}
-
-.swiper-slide {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 7px;
-}
-
-.swiper-slide img{
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+  background-color: black;
 }
 
 .logo {

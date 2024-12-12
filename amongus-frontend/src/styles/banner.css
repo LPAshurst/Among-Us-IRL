@@ -1,0 +1,41 @@
+.banner {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: rgb(30 58 138);
+  align-items: center;
+  height: 10%;
+  justify-content: center;
+
+}
+.banner-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-img {
+  width: 3.2rem;
+}
+
+.banner-text {
+  font-family: fantasy;
+  font-size: xx-large;
+  color: rgb(229 229 229);
+  padding: .625rem;
+}
+
+/* This is styles for smaller screens */
+@media (max-width: 768px) {
+  .banner-img {
+    width: 2.5rem;
+  }
+
+  .banner-text {
+    font-size: 23px;
+    font-weight: bolder;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+}

@@ -4,35 +4,22 @@ import auth from '../config/auth';
 
 const taskRouter = Router();
 
-// TEMP GAME STUFF
-interface Game {
-  code: string;
-  players: string[];
-}
-const gamelist = {"abc123": {code: "abc123", players: ["player1", "player2"]} as Game};
-
-
-taskRouter.get('/game', (req, res) => {
-  gamelist["new456"] = {code: "abc123", players: ["player1", "player2"]} as Game;
-  res.json(gamelist);
-})
-
-
-// specifies the endpoint and the method to call
+// Gets all tasks
 taskRouter.get('/', taskController.getAll);
 
-// taskRouter.get('/', function (req, res) {
-//   res.send('id: ' + req.query.id);
-// });
-
+// Gets an example tasklist
 taskRouter.get('/list', taskController.getExample);
 
+// Gets the tasklist specified by the given user id
 taskRouter.get('/user/:id', (req, res) => {
   taskController.getUserTasks(req, res, +req.params.id);
 });
 
+// Gets all tasks associated with the given user
+// Same as /user/id except it uses the authentication middleware to get the id
 taskRouter.get('/user', auth.authenticateToken, (req, res) => {
   taskController.getUserTasks(req, res, +(req as any).user);
 });
-// export the router
+
+
 export default taskRouter;

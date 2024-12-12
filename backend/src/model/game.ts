@@ -1,19 +1,15 @@
+import Player from "./player";
+import Task from "./task";
+
 export default interface Game {
-
-
-  roomCode: number;
-  ownerID: number;
-  playerList: [];
-  taskList: [];
+  room: string;
+  owner: number; //id of the owner user
+  players: Record<number, Player>; //list of players
+  tasklist: Task[]; //list of tasks to be used by all players
   started: boolean;
-  startTime: number;
+  startTime: Date;
   imposterCount: number;
-  progress: number;
-
-
-
-
-
-
-
+  totalTasks: number;
+  completedTasks: number;
+  meeting: boolean;
 }

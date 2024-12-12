@@ -1,0 +1,51 @@
+.game-create-screen {
+  display: flex;
+  background-image: url("../assets/space_background.png");
+  flex-direction: column;
+  align-items: center;
+  min-height: 80%;
+}
+
+.game-settings {
+  display: flex;
+  position: absolute;
+  background-color: rgb(134, 131, 131);
+  background-size: 110% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: 'absolute';
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,  -50%);
+  width: 40vw;
+  height: fit-content;
+  padding: 3rem;
+  align-items: center;
+  border: '2px solid #000';
+  flex-direction: column;
+}
+
+.game-code {
+  font-family: Lusitana, sans-serif;
+  font-weight: 700;
+  color: rgb(229 229 229);
+  font-size: 20px;
+  margin-top: 0.5rem;
+
+}
+
+.game-create-content {
+  display: flex;
+  margin: 2rem;
+}
+
+.settings-quick-view {
+  background-color: #FFFFFF;
+  padding: 1rem;
+}
+
+.form-title {
+  font-weight: bolder;
+  font-size: large;
+  margin-bottom: 2%;
+}

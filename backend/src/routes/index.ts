@@ -4,9 +4,10 @@ import userRouter from './user.route';
 import gameRouter from './game.route';
 
 const routes = Router();
-// define the base path and the router that's going to be called
+
+// Defines the base paths and the routers that are used
 routes.use('/tasks', taskRouter);
 routes.use('/auth', userRouter);
-routes.use('game', gameRouter);
-// export the route
+routes.use('/game', gameRouter);
+
 export default routes;

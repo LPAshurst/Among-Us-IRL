@@ -1,8 +1,6 @@
 const jwt = require("jsonwebtoken");
 import { connection, connectionProm } from '../config/db';
 import { QueryError, PoolConnection, format } from 'mysql2';
-import { User } from '../model/user';
-import { checkServerIdentity } from 'tls';
 
 function generateAccessToken(id) {
   return jwt.sign({ id }, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
@@ -23,7 +21,8 @@ function createNewUser(req, res) {
       console.error("Attempted to create user with duplicate username");
       res.status(500).send({
         message: 'USERNAME ALREADY EXISTS',
-        result: null
+        result: null,
+
       });
     } else {
       connection.getConnection((err: QueryError, conn: PoolConnection) => {
@@ -36,6 +35,7 @@ function createNewUser(req, res) {
             });
           } else {
             conn.query("SELECT LAST_INSERT_ID()", (err, resultSet: any) => {
+              console.log(resultSet);
               conn.release();
               if (err) {
                 console.error(err.message);
@@ -44,7 +44,7 @@ function createNewUser(req, res) {
                   result: null
                 });
               } else {
-                const token = generateAccessToken(resultSet.LAST_INSERT_ID);
+                const token = generateAccessToken(resultSet[0]['LAST_INSERT_ID()']);
                 res.json(token);
               }
             })
@@ -97,13 +97,12 @@ function authenticateToken(req, res, next) {
 
   if (token == null) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.TOKEN_SECRET as string, (err, user) => {
-    console.log(err);
-
-    if (err) return res.sendStatus(403);
-
-    req.user = user;
-
+  jwt.verify(token, process.env.TOKEN_SECRET as string, { ignoreExpiration: true}, (err, user) => {
+    if (err) {
+      console.error("User failed to authenticate");
+      return res.status(403).send("Invalid authorization header");
+    }
+    req.user = +user.id;
     next();
   });
 }

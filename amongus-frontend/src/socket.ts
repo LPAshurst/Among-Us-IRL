@@ -1,9 +1,10 @@
-import { io } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io';
+import { io, Socket } from 'socket.io-client';
 
-// "undefined" means the URL will be computed from the `window.location` object
-const URL = process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:3010';
+// const URL = process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:3010';
+const URL = import.meta.env.VITE_API_URL;
 
-export let socket = io(URL, {
+export let socket: Socket<DefaultEventsMap, DefaultEventsMap> = io(URL, {
     auth: {
       token: localStorage.getItem("logged_in")
     }

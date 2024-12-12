@@ -1,0 +1,7 @@
+.waiting-room-screen {
+  display: flex;
+  background-image: url("../assets/space_background.png");
+  flex-direction: column;
+  align-items: center;
+  min-height: 80%;
+}

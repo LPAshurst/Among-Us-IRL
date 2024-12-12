@@ -1,0 +1,114 @@
+.task-screen {
+  display: flex;
+  background-image: url("../assets/space_background.png");
+  flex-direction: column;
+  align-items: center;
+  min-height: 100%;
+}
+
+.task-accor {
+  margin-top: 5%;
+  display: flex;
+  width: 70%;
+  align-self: center;
+  height: auto;
+  flex-direction: column;
+}
+
+.task-bar {
+  width: 60%;
+  margin-top: 1%;
+  position: "fixed";
+}
+
+.crewmate-button-group {
+  display: flex;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.crewmate-button {
+  white-space: normal;
+  text-align: center;
+  max-width: 120px; 
+  overflow-wrap: break-word;
+}
+
+.imposter-button-group {
+  display: flex;
+  margin-top: 1%;
+}
+
+.role-screen {
+  display: flex;
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%,  -50%);
+  width: 60vw;
+  height: fit-content;
+  align-items: center;
+  border: '2px solid #000';
+  flex-direction: column;
+}
+
+.kill-button {
+  border-radius: 50%; 
+  width: 30vw;
+  height: 30vw;  
+  border: 0;
+  color: white;
+  font-family: Avenir, Arial, sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  background: red;
+  text-transform: uppercase;
+  outline: none; 
+  cursor: pointer;
+  text-align: center;
+  
+}
+
+.vr {
+  background-color: whitesmoke;
+  width: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.button-group-title {
+  margin-top: 10px;
+  font-family: Lusitana, sans-serif;
+  font-size: 20px;
+  color: rgb(252, 255, 255);
+}
+
+.button-text {
+  font-size: smaller;
+}
+
+@media (max-width: 768px) {
+  .task-bar {
+    width: 80%;
+    margin-top: 5%;
+    position: "fixed";
+  }
+
+  .task-accor {
+    margin-top: 10%;
+    display: flex;
+    width: 70%;
+    align-self: center;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .button-group {
+    display: flex;
+    margin-top: 2%;
+
+  }
+
+
+}

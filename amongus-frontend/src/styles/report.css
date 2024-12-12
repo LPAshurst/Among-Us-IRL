@@ -1,0 +1,33 @@
+.outer-report-list > li {
+  padding: 1%;
+  text-wrap: wrap;
+  list-style-type: decimal;
+  margin-left: 5%;
+}
+
+.outer-report-list {
+  width: 30%;
+  background-color: rgba(200, 200, 200, 1);
+  align-self: center;
+  margin-top: 2%;
+}
+
+.inner-report-list {
+  padding-left: 30px;
+}
+
+.inner-report-list > li {
+  padding: 1%;
+  text-wrap: wrap;
+  margin-left: 5%;
+  list-style-type: disc;
+}
+
+
+@media (max-width: 768px) {
+
+  .outer-report-list {
+    width: 80%;
+  }
+
+}
