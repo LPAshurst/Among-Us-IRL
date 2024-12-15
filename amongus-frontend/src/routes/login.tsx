@@ -75,6 +75,8 @@ export default function SignIn() {
       navigate("/join-create");
     }
     window.scrollTo(0, 0);
+    console.log(import.meta.env.VITE_API_URL);
+
   }, []);
     
   async function validateInputs() {
