@@ -34,10 +34,6 @@ export default function App() {
     socket.on('connect', onConnect);
     socket.on('disconnect', onDisconnect);
 
-    socket.on('chat message', (msg) => {
-      console.log(msg);
-    })
-    socket.emit('chat message', "hello");
     return () => {
       socket.off('connect', onConnect);
       socket.off('disconnect', onDisconnect);
