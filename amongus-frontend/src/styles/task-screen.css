@@ -53,6 +53,30 @@
   flex-direction: column;
 }
 
+.meeting-message {
+  display: flex;
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%,  -50%);
+  width: 90vw;
+  height: fit-content;
+  align-items: center;
+  border: '2px solid #000';
+  flex-direction: column;
+  color: white;
+}
+
+
+.meeting-message-text {
+
+  position: absolute;
+
+  
+}
+
+
 .kill-button {
   border-radius: 50%; 
   width: 30vw;

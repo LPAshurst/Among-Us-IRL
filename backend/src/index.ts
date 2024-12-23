@@ -113,12 +113,12 @@ io.on('connection', (socket) => {
     }
   }); 
 
-  socket.on("initMeeting", (room, message, callback) => {
+  socket.on("initMeeting", (room, message, type) => {
 
     const game = gamelist[room];
     if (game) {
       game.meeting = true;
-      io.to(game.room).emit("meetingMessage", message); 
+      io.to(game.room).emit("meetingMessage", message, type); 
     }
  
 

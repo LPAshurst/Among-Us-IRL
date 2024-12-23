@@ -17,9 +17,13 @@ import { useNavigate } from "react-router-dom";
 import Modal from '@mui/material/Modal';
 import ClearIcon from '@mui/icons-material/ClearTwoTone';
 import { red } from '@mui/material/colors';
-import "../styles/task-screen.css"
-import imposterScreen from  "../assets/Among-Us-Imposter-Loading-Screen.avif"
-import crewmateScreen from "../assets/Among-Us-Crewmate.png"
+import "../styles/task-screen.css";
+import imposterScreen from  "../assets/Among-Us-Imposter-Loading-Screen.avif";
+import crewmateScreen from "../assets/Among-Us-Crewmate.png";
+import emergencyMeeting from "../assets/emergency-meeting.mp4";
+import imposterKillText from "../assets/ImposterKillBlackText.png";
+import emergencyMeetingPicture from "../assets/EmergencyMeetingfIXED.png";
+
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -68,11 +72,18 @@ export default function TaskScreen() {
   const [open, setOpen] = useState(false);
   const [imposterNames, setImposterNames] = useState<String[]>();
   const navigate = useNavigate();
+
+  const [meetingOpen, setMeetingOpen] = useState(false);
+  const [meetingMessage, setMeetingMessage] = useState("");
+  const [meetingType, setMeetingType] = useState("dead body");
+
+  const [audio] = useState(new Audio(emergencyMeeting));
   
   const { room } = useParams();
 
   function reportDead() {
-    socket.emit("initMeeting", room, "A dead body has been discovered. Please report to the main room.");
+    socket.emit("initMeeting", room, "A dead body has been discovered. Please report to the main room.", "dead body");
+    setMeetingType("dead body");
     setMeeting(true);
   }
 
@@ -115,8 +126,11 @@ export default function TaskScreen() {
       setMeeting(false);
     });
   
-    socket.on("meetingMessage", (message) => {
-      window.alert(message);
+    socket.on("meetingMessage", (message, type) => {
+      audio.play();
+      setMeetingOpen(true);
+      setMeetingMessage(message);
+      setMeetingType(type);
       setMeeting(true);
     });
     window.scrollTo(0, 0);
@@ -188,8 +202,35 @@ export default function TaskScreen() {
           <img src={crewmateScreen}/>
           </>
           }
-        </div>
+        </div>  
+      </Modal>
       
+      <Modal
+        open={meetingOpen}
+      >
+        <div className='meeting-message'>
+          
+          
+          {
+            meetingType !== "dead body" ? 
+            <>
+              <ClearIcon fontSize="large" sx={{position: "absolute", right: "0px", color: 'white'}} onClick={() => setMeetingOpen(false)}/>
+              <img 
+                src={imposterKillText} 
+                style={{marginTop: "1.2rem"}}
+              />
+            </>
+            :
+            <>
+            <ClearIcon fontSize="large" sx={{position: "absolute", right: "0px", color: 'black'}} onClick={() => setMeetingOpen(false)}/>
+              <img 
+                src={emergencyMeetingPicture} 
+              />
+            </>
+          }
+          
+          <p className='meeting-message-text'>{meetingMessage}</p>
+        </div>  
       </Modal>
 
       <h1 className="button-group-title">Reporting Options</h1>

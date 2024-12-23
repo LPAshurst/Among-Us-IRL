@@ -41,7 +41,7 @@ export default function AdminConsole() {
     var delay = 1000;
     setTimeout(() => button.classList.remove("pressed"), delay);
 
-    socket.emit("initMeeting", room, "An emergency meeting has been called. Please make your way to the admin room");
+    socket.emit("initMeeting", room, "An emergency meeting has been called. Please make your way to the admin room", "emergency meeting");
     socket.emit("requestAlive", room);
 
     setMeeting(true);
