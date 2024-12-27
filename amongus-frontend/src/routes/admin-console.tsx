@@ -11,7 +11,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 export default function AdminConsole() {
 
   const { room } = useParams();
@@ -21,6 +21,9 @@ export default function AdminConsole() {
   const [alive, setAlive] = useState<string[]>([]);
   const [value, setValue] = useState('');
   const [meeting, setMeeting] = useState(false);
+  const [timeData, setTimeData] = useState(
+    { date: Date.now(), delay: 300000 } //5 minutes
+  );
   const navigate = useNavigate();
 
   socket.on("meetingMessage", reportedMeeting);
@@ -61,6 +64,10 @@ export default function AdminConsole() {
   }
 
   function handleAutoClose() {
+
+    if (localStorage.getItem("endTime") != null)
+      localStorage.removeItem("endTime");
+
     if (meeting) { // only attempt to auto close if the meeting is still in progress
       if (value == '') {
         window.alert("no one was voted out....")
@@ -86,6 +93,8 @@ export default function AdminConsole() {
     handleClose();
     setValue(''); // reset the value
     setMeeting(false);
+    if (localStorage.getItem("endTime") != null)
+      localStorage.removeItem("endTime");
   };
 
   socket.on("aliveList", (alive) => {
@@ -104,6 +113,34 @@ export default function AdminConsole() {
       window.alert(`${username} was not an imposter`);
     }
   });
+
+
+  useEffect(() => {
+    
+    socket.on("recieveMeetingStatus", (meeting: boolean) =>  {
+      setMeeting(meeting);
+      setOpen(meeting);
+    });
+
+    socket.on("completedMeeting", () => {
+      setMeeting(false);
+    });
+
+    const savedTime = localStorage.getItem("endTime");
+
+    if (savedTime != null ) {
+      const currentTime = Date.now();
+      const delta = parseInt(savedTime, 10) - currentTime;
+      
+      if (delta <= 0) {
+        localStorage.removeItem("endTime");
+      } else {
+        //No update the end date  
+        setTimeData({ date: currentTime, delay: delta });
+      }
+    }
+
+  }, []);
 
   return (
     <>
@@ -191,8 +228,14 @@ export default function AdminConsole() {
 
                   <Countdown
                     onComplete={handleAutoClose}
-                    date={Date.now() + 300000}
+                    date={timeData.date + timeData.delay}
                     className="countdown" 
+                    onStart={(_delta) => {
+                      if (localStorage.getItem("endTime") == null) {
+                        localStorage.setItem("endTime", JSON.stringify(timeData.date + timeData.delay))
+                      }
+                    }}
+
                     renderer={
                       props => <span style=
                       {{

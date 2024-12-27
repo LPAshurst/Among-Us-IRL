@@ -74,7 +74,6 @@ export default function TaskScreen() {
   const navigate = useNavigate();
 
   const [meetingOpen, setMeetingOpen] = useState(false);
-  const [meetingMessage, setMeetingMessage] = useState("");
   const [meetingType, setMeetingType] = useState("dead body");
 
   const [audio] = useState(new Audio(emergencyMeeting));
@@ -126,10 +125,9 @@ export default function TaskScreen() {
       setMeeting(false);
     });
   
-    socket.on("meetingMessage", (message, type) => {
+    socket.on("meetingMessage", (_message, type) => {
       audio.play();
       setMeetingOpen(true);
-      setMeetingMessage(message);
       setMeetingType(type);
       setMeeting(true);
     });
@@ -229,7 +227,6 @@ export default function TaskScreen() {
             </>
           }
           
-          <p className='meeting-message-text'>{meetingMessage}</p>
         </div>  
       </Modal>
 
