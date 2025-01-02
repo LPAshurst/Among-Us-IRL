@@ -210,7 +210,7 @@ export default function TaskScreen() {
           
           
           {
-            meetingType !== "dead body" ? 
+            meetingType == "dead body" ? 
             <>
               <ClearIcon fontSize="large" sx={{position: "absolute", right: "0px", color: 'white'}} onClick={() => setMeetingOpen(false)}/>
               <img 
